@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Tag</string>
-    <string name="title_text">Tracker-X</string>
+    <string name="title_text">Tag</string>
     <string name="button_find">Find</string>
     <string name="button_register">Register</string>
     <string name="button_edit">edit</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_gpsfind">Map</string>
+    <string name="title_activity_list_items">ListItemsActivity</string>
 </resources>
