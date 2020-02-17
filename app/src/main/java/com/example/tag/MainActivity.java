@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Find", Toast.LENGTH_SHORT).show();
-                Intent findIntent = new Intent(MainActivity.this, GPSFindActivity.class);
+                Intent findIntent = new Intent(MainActivity.this, ListItemsActivity.class);
                 //pass any variables in here using .putExtra(), most likely user information
                 startActivity(findIntent);
             }
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Edit", Toast.LENGTH_SHORT).show();
+                Intent editIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                startActivity(editIntent);
                 // Do something in response to button click
             }
         });
