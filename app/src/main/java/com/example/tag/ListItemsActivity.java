@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ListItemsActivity extends AppCompatActivity {
+public class ListItemsActivity extends AppCompatActivity implements MyAdapter.ItemClickListener{
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private MyAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<String> myDataset;  // this will be a list of items
 
@@ -27,19 +28,32 @@ public class ListItemsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.item_recycler);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
+        myDataset = new ArrayList<>();
+        // Populate the arraylist with a bunch of items
+        myDataset.add("Phone");
+        myDataset.add("Keys");
+        myDataset.add("Wallet");
+        myDataset.add("My sanity (rip)");
 
-        // use a linear layout manager
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rvItems);
+//        // use this setting to improve performance if you know that changes
+//        // in content do not change the layout size of the RecyclerView
+//        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter= new MyAdapter(this, myDataset);
+        mAdapter.setClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
+//        mRecyclerView = (RecyclerView) findViewById(R.id.item_recycler);
+//
+//        // use a linear layout manager
+//        mLayoutManager = new LinearLayoutManager(this);
+//        mRecyclerView.setLayoutManager(mLayoutManager);
+//
+//        // specify an adapter (see also next example)
+//        mAdapter = new MyAdapter(myDataset);
+//        mRecyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -49,5 +63,10 @@ public class ListItemsActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(this, "You clicked " + mAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
 }

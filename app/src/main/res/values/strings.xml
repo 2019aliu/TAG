@@ -7,4 +7,6 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_gpsfind">Map</string>
     <string name="title_activity_list_items">ListItemsActivity</string>
+    <string name="rvItems">ItemRecyclerView</string>
+    <string name="tvItem">ItemRow</string>
 </resources>
