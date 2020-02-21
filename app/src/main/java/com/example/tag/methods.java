@@ -20,7 +20,7 @@ public class methods {
      * @param itemID item ID
      * @return selected item
      */
-    public Item displayItems(int itemID) {
+    public void displayItems(int itemID) {
 
     }
 
@@ -62,7 +62,7 @@ public class methods {
      * @return item coordinates
      */
     public int[] getItemLocation(int itemID) {
-
+        return null;
     }
 
 
@@ -73,7 +73,7 @@ public class methods {
      * @return user coordinates
      */
     public int[] getUserLocation(int itemID) {
-
+        return null;
     }
 
 
@@ -96,7 +96,7 @@ public class methods {
      * @return bluetooth usability
      */
     public boolean bluetoothInRange(int[] itemCoordinates, int[] userCoordinates) {
-
+        return false;
     }
 
 
@@ -108,7 +108,7 @@ public class methods {
      * @return wifi usability
      */
     public boolean wifiInRange(int[] itemCoordinates, int[] userCoordinates) {
-
+        return false;
     }
 
 
@@ -118,7 +118,7 @@ public class methods {
      * @return permission given for Bluetooth
      */
     public boolean askBTPermissions() {
-
+        return false;
     }
 
 
@@ -137,7 +137,7 @@ public class methods {
      * @return permission given for Wifi
      */
     public boolean askWFPermissions() {
-
+        return false;
     }
 
 
@@ -166,7 +166,7 @@ public class methods {
      * @return found or not found
      */
     public boolean confirmFindings(boolean inputConfirm) {
-
+        return false;
     }
 
 

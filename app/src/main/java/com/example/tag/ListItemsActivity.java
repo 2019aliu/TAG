@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class ListItemsActivity extends AppCompatActivity implements MyAdapter.ItemClickListener{
     private RecyclerView mRecyclerView;
     private MyAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     private ArrayList<String> myDataset;  // this will be a list of items
 
     @Override
@@ -40,20 +41,18 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
 //        // use this setting to improve performance if you know that changes
 //        // in content do not change the layout size of the RecyclerView
 //        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         mAdapter= new MyAdapter(this, myDataset);
         mAdapter.setClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
-//        mRecyclerView = (RecyclerView) findViewById(R.id.item_recycler);
-//
-//        // use a linear layout manager
-//        mLayoutManager = new LinearLayoutManager(this);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//
-//        // specify an adapter (see also next example)
-//        mAdapter = new MyAdapter(myDataset);
-//        mRecyclerView.setAdapter(mAdapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
+                mLayoutManager.getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
