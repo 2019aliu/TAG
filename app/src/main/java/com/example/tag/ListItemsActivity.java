@@ -40,7 +40,7 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
         mRecyclerView = (RecyclerView) findViewById(R.id.rvItems);
 //        // use this setting to improve performance if you know that changes
 //        // in content do not change the layout size of the RecyclerView
-//        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
