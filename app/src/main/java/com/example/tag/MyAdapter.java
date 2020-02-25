@@ -1,34 +1,34 @@
 package com.example.tag;
 
 import android.content.Context;
-import android.nfc.Tag;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import io.reactivex.Observable;
-import io.reactivex.subjects.*;
+//import io.reactivex.Observable;
+//import io.reactivex.subjects.*;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
-    private List<String> mData;
+    private List<MyItem> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
-    private final PublishSubject<String> onClickSubject = PublishSubject.create();
+//    private final PublishSubject<String> onClickSubject = PublishSubject.create();
     private static final String TAG = "debugging";
 
     // stores and recycles views as they are scrolled off screen
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        View view;
         TextView myTextView;
 
         MyViewHolder(View itemView) {
             super(itemView);
+            view = itemView;
             myTextView = itemView.findViewById(R.id.tvItem);
             itemView.setOnClickListener(this);
         }
@@ -40,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // data is passed into the constructor
-    public MyAdapter(Context context, List<String> data) {
+    public MyAdapter(Context context, List<MyItem> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -59,30 +59,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        final String item = mData.get(position);
-        holder.myTextView.setText(item);
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+        final MyItem item = mData.get(position);
+        holder.myTextView.setText(item.getText());
         holder.myTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "HELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOHELLOchange damnit");
-                onClickSubject.onNext(item);
+                item.setSelected(!item.isSelected());
+                holder.view.setBackgroundColor(item.isSelected() ? Color.CYAN : Color.WHITE);
             }
         });
     }
 
-    public Observable<String> getPositionClicks(){
-        return onClickSubject;  // isn't a publish subject an observable?
-    }
+//    public Observable<String> getPositionClicks(){
+//        return onClickSubject;  // isn't a publish subject an observable?
+//    }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mData == null ? 0 : mData.size();
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
+    MyItem getItem(int id) {
         return mData.get(id);
     }
 
