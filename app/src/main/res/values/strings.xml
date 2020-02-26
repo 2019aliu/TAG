@@ -9,4 +9,9 @@
     <string name="title_activity_list_items">ListItemsActivity</string>
     <string name="rvItems">ItemRecyclerView</string>
     <string name="tvItem">ItemRow</string>
+    <string name="registerTitle">Register</string>
+    <string name="nameLabel">Name</string>
+    <string name="descriptionLabel">Description</string>
+    <string name="registerButton">Register</string>
+
 </resources>

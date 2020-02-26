@@ -56,7 +56,6 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.custom_ripple);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
