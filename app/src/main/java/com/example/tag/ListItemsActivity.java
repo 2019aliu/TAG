@@ -70,8 +70,10 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + mAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-        Intent findIntent = new Intent(this, GPSFindActivity.class);
+        Intent mapIntent = new Intent(this, GPSFindActivity.class);
         //pass any variables in here using .putExtra(), most likely user information
-        startActivity(findIntent);
+        mapIntent.putExtra("Destination_Lat", 33.794723);
+        mapIntent.putExtra("Destination_Long", -84.411220);
+        startActivity(mapIntent);
     }
 }

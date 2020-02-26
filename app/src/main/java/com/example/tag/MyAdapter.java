@@ -6,9 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-//import io.reactivex.Observable;
-//import io.reactivex.subjects.*;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -50,11 +47,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_row, parent, false);
         return new MyViewHolder(view);
-        // create a new view
-//        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.item_row, parent, false);
-//        MyViewHolder vh = new MyViewHolder(v);
-//        return vh;
     }
 
     // binds the data to the TextView in each row
@@ -71,10 +63,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         });
     }
 
-//    public Observable<String> getPositionClicks(){
-//        return onClickSubject;  // isn't a publish subject an observable?
-//    }
-
     // total number of rows
     @Override
     public int getItemCount() {
@@ -82,8 +70,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     // convenience method for getting data at click position
-    MyItem getItem(int id) {
-        return mData.get(id);
+    String getItem(int id) {
+        return mData.get(id).getText();
     }
 
     // allows clicks events to be caught
