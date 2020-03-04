@@ -3,10 +3,13 @@ package com.example.tag;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -43,6 +46,8 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
     private static final int overview = 0;
     double originLat = 0.0;
     double originLng = 0.0;
+
+    private Button mFinishGPS;
 
     /*
     Get current location
@@ -83,6 +88,18 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // set up finish button
+        mFinishGPS = (Button) findViewById(R.id.button_finishGPS);
+        mFinishGPS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(GPSFindActivity.this, "Register", Toast.LENGTH_SHORT).show();
+                Intent settingsIntent = new Intent(GPSFindActivity.this, SettingsActivity.class);
+                //pass any variables in here using .putExtra(), most likely user information
+                startActivity(settingsIntent);
+            }
+        });
 
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         fusedLocationClient.getLastLocation()
