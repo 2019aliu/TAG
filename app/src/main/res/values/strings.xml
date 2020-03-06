@@ -17,17 +17,34 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="bluetooth_wifi_header">Bluetooth/Wifi</string>
+    <string name="camera_header">Camera</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <!-- Bluetooth/Wifi Preferences -->
+    <string name="bluetooth_title">Bluetooth</string>
+    <string name="bluetooth_summary_on">Enabled</string>
+    <string name="bluetooth_summary_off">Disabled</string>
+    <string name="wifi_title">Wifi</string>
+    <string name="wifi_summary_on">Enabled</string>
+    <string name="wifi_summary_off">Disabled</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!--  Camera Preferences  -->
+    <string name="camera_title">Camera AR</string>
+    <string name="camera_summary_on">Enabled</string>
+    <string name="camera_summary_off">Disabled</string>
+
+    <!--    &lt;!&ndash; Messages Preferences &ndash;&gt;-->
+    <!--    <string name="signature_title">Your signature</string>-->
+    <!--    <string name="reply_title">Default reply action</string>-->
+
+    <!--    &lt;!&ndash; Sync Preferences &ndash;&gt;-->
+    <!--    <string name="sync_title">Sync email periodically</string>-->
+    <!--    <string name="attachment_title">Download incoming attachments</string>-->
+    <!--    <string name="attachment_summary_on">Automatically download attachments for incoming emails-->
+    <!--    </string>-->
+    <!--    <string name="attachment_summary_off">Only download attachments when manually requested</string>-->
+
+    <string name="btwifi_title">Please enable Bluetooth and/or Wifi to locate your device (turn on both for best results)</string>
+    <string name="btwifi_settings">Bluetooth/Wifi Settings</string>
+    <string name="btwifi_checked">Locate Device</string>
 </resources>

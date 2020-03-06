@@ -94,10 +94,15 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
         mFinishGPS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(GPSFindActivity.this, "Register", Toast.LENGTH_SHORT).show();
-                Intent settingsIntent = new Intent(GPSFindActivity.this, SettingsActivity.class);
+//                Toast.makeText(GPSFindActivity.this, "Finished Map", Toast.LENGTH_SHORT).show();
+//                Intent settingsIntent = new Intent(GPSFindActivity.this, SettingsActivity.class);
+//                //pass any variables in here using .putExtra(), most likely user information
+//                startActivity(settingsIntent);
+
+                Intent btWifiIntent = new Intent(GPSFindActivity.this, BTWifiActivity.class);
                 //pass any variables in here using .putExtra(), most likely user information
-                startActivity(settingsIntent);
+                startActivity(btWifiIntent);
+
             }
         });
 
