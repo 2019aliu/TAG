@@ -45,4 +45,14 @@
         android:textSize="36sp"
         android:layout_marginTop="20sp"
         android:width="360dp"/>
+
+    <Button
+        android:id="@+id/button_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:theme="@style/AppTheme.Button"
+        android:textSize="36sp"
+        android:layout_marginTop="20sp"
+        android:width="360dp"/>
 </LinearLayout>
