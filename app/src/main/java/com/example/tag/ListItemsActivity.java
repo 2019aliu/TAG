@@ -33,10 +33,10 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
 
         myDataset = new ArrayList<>();
         // Populate the arraylist with a bunch of items
-        myDataset.add(new MyItem("Phone"));
-        myDataset.add(new MyItem("Keys"));
-        myDataset.add(new MyItem("Wallet"));
-        myDataset.add(new MyItem("My sanity (rip)"));
+        myDataset.add(new MyItem("Phone", "Galaxy S9", "E8:99:C4:D1:CA:25", "1c:b0:94:86:4e:6c"));
+        myDataset.add(new MyItem("Keys", "Dorm keys plus Explore lanyard", "00:00:00:00:00:00", "12:34:56:78:90:12"));
+        myDataset.add(new MyItem("Wallet", "Buzzcard, debit, and cash", "11:22:33:44:55:66", "13:24:35:46:57:68"));
+        myDataset.add(new MyItem("My sanity (rip)", "Help I've gone insane", "AA:BB:CC:DD:EE:FF", "10:29:38:47:56:65"));
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvItems);

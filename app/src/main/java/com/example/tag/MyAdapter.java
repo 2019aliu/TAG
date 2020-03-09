@@ -2,7 +2,9 @@ package com.example.tag;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.RippleDrawable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -53,12 +55,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final MyItem item = mData.get(position);
-        holder.myTextView.setText(item.getText());
+        holder.myTextView.setText(item.getName());
         holder.myTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 item.setSelected(!item.isSelected());
-                holder.view.setBackgroundColor(item.isSelected() ? Color.CYAN : Color.WHITE);
+                RippleDrawable rippleDrawable = (RippleDrawable) v.getBackground();
+                v.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return false;
+                    }
+                });
+
+//                holder.view.setBackgroundColor(item.isSelected() ? Color.parseColor("7fadff") : Color.WHITE);
             }
         });
     }
@@ -71,7 +81,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     // convenience method for getting data at click position
     String getItem(int id) {
-        return mData.get(id).getText();
+        return mData.get(id).getName();
     }
 
     // allows clicks events to be caught

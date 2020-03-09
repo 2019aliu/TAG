@@ -16,6 +16,12 @@
     <string name="finishGPSText">Done</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!--  Register an item  -->
+    <string name="item_name_hint">The name of your item</string>
+    <string name="item_desc_hint">A short description of what your item looks like</string>
+    <string name="item_wifi_switch">Link with Wifi</string>
+    <string name="item_bt_switch">Link with Bluetooth</string>
+
     <!-- Preference Titles -->
     <string name="bluetooth_wifi_header">Bluetooth/Wifi</string>
     <string name="camera_header">Camera</string>

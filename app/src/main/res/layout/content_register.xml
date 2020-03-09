@@ -1,59 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".RegisterActivity"
     tools:showIn="@layout/activity_register">
 
-    <TextView
-        android:id="@+id/title_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/registerTitle"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:textSize="30sp"
-        android:padding="20sp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/title_register"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="20sp"-->
+<!--        android:text="@string/registerTitle"-->
+<!--        android:textSize="30sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/nameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nameLabel"/>
+        android:layout_marginStart="@android:dimen/notification_large_icon_width"
+        android:layout_marginTop="32dp"
+        android:text="@string/nameLabel"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"/>
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/item_name_hint"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        app:layout_constraintStart_toStartOf="@+id/nameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
     <TextView
         android:id="@+id/descriptionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/descriptionLabel"/>
+        android:layout_marginTop="24dp"
+        android:text="@string/descriptionLabel"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/itemName"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <EditText
         android:id="@+id/itemDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"/>
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/item_desc_hint"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="@+id/descriptionLabel"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
 
-<!--    <Button-->
-<!--        android:id="@+id/registerNewItemButton"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="100dp"-->
-<!--        android:text="@string/registerButton"/>-->
+    <Switch
+        android:id="@+id/wifi_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@android:dimen/notification_large_icon_width"
+        android:layout_marginTop="32dp"
+        android:switchPadding="76dp"
+        android:text="@string/item_wifi_switch"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+
+    <Switch
+        android:id="@+id/bt_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:switchPadding="@dimen/activity_horizontal_margin"
+        android:text="@string/item_bt_switch"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wifi_switch" />
 
 
-
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
