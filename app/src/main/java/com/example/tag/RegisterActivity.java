@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
@@ -97,6 +98,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+
+        // Submit button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +112,47 @@ public class RegisterActivity extends AppCompatActivity {
                         + name + " and description " + description);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
+
+                int REQUEST_ENABLE_BT = 1;
+                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+
+                // Currently paired devices
+                BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+                if (pairedDevices.size() > 0) {
+                    for (BluetoothDevice device: pairedDevices) {
+                        Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
+                    }
+                }
+
+                // Discovering devices with bluetooth
+
+                // Bluetooth discoverer: Create a BroadcastReceiver for ACTION_FOUND.
+                final BroadcastReceiver receiver = new BroadcastReceiver() {
+                    public void onReceive(Context context, Intent intent) {
+                        String action = intent.getAction();
+                        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+                            // Discovery has found a device. Get the BluetoothDevice
+                            // object and its info from the Intent.
+                            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//                            String deviceName = device.getName();
+//                            String deviceHardwareAddress = device.getAddress(); // MAC address
+                            Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
+                        }
+                    }
+                };
+
+
+                // Register for broadcasts when a device is discovered.
+                IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+                registerReceiver(receiver, filter);
+
+                // Don't forget to unregister the ACTION_FOUND receiver.
+                unregisterReceiver(receiver);
+
+
+
 
 
 //                /*

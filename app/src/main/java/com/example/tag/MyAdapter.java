@@ -56,21 +56,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final MyItem item = mData.get(position);
         holder.myTextView.setText(item.getName());
-        holder.myTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                item.setSelected(!item.isSelected());
-                RippleDrawable rippleDrawable = (RippleDrawable) v.getBackground();
-                v.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-                        return false;
-                    }
-                });
-
-//                holder.view.setBackgroundColor(item.isSelected() ? Color.parseColor("7fadff") : Color.WHITE);
-            }
-        });
+        holder.view.setBackgroundColor(item.isSelected() ? Color.parseColor("7fadff") : Color.WHITE);
     }
 
     // total number of rows
