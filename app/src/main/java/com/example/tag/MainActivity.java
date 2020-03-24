@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tag.ui.login.LoginActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     private String mTitle;
@@ -67,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mTestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent testIntent = new Intent(MainActivity.this, LoginActivity.class);
+                Intent testIntent = new Intent(MainActivity.this, MainActivityAlt.class);
                 startActivity(testIntent);
             }
         });
