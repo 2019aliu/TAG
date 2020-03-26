@@ -63,6 +63,8 @@ public class BTWifiActivity extends AppCompatActivity {
                 } else if (mWifiManager.isWifiEnabled() || mBluetoothAdapter.isEnabled()) {
                     Snackbar.make(v, "Signal enabled. Searching...", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    Intent closeRangeIntent = new Intent(BTWifiActivity.this, CloseRangeActivity.class);
+                    startActivity(closeRangeIntent);
                 } else {
                     Snackbar.make(v, "Please turn on bluetooth or Wifi, or both", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();

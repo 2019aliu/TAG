@@ -76,4 +76,14 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="title_activity_close_range">CloseRangeActivity</string>
+    <string name="found_dialog_title">Confirm Retrieved Device</string>
+    <string name="found_dialog_message">Please confirm that you\'ve found your device</string>
+    <string name="found_ok">Confirm</string>
+    <string name="found_cancel">Cancel</string>
+<!--    <string name="found_missing">Help</string>-->
+
+    <string name="closerange_cold">Start walking around</string>
+    <string name="closerange_medium">Getting closer…</string>
+    <string name="closerange_hot">Very close!</string>
 </resources>

@@ -16,6 +16,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 
@@ -46,6 +47,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 // implements WifiP2pManager.ChannelListener, DeviceListFragment.DeviceActionListener
@@ -62,21 +64,22 @@ public class RegisterActivity extends AppCompatActivity {
     // Bluetooth Connection
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-//    // Wifi P2P Connection
-//    private final IntentFilter intentFilter = new IntentFilter();
-//    private WifiP2pManager.Channel channel;
-//    private WifiP2pManager manager;
-//    private BroadcastReceiver receiver = null;
-//    private boolean isWifiP2pEnabled = false;
+    // Wifi P2P Connection
+    private final IntentFilter intentFilter = new IntentFilter();
+    private WifiP2pManager.Channel channel;
+    private WifiP2pManager manager;
+    private BroadcastReceiver receiver = null;
+    private boolean isWifiP2pEnabled = false;
+    private List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
 //    private boolean retryChannel = false;
 //    private static final int PERMISSIONS_REQUEST_CODE_ACCESS_FINE_LOCATION = 1001;
 
-//    /**
-//     * @param isWifiP2pEnabled the isWifiP2pEnabled to set
-//     */
-//    public void setIsWifiP2pEnabled(boolean isWifiP2pEnabled) {
-//        this.isWifiP2pEnabled = isWifiP2pEnabled;
-//    }
+    /**
+     * @param isWifiP2pEnabled the isWifiP2pEnabled to set
+     */
+    public void setIsWifiP2pEnabled(boolean isWifiP2pEnabled) {
+        this.isWifiP2pEnabled = isWifiP2pEnabled;
+    }
 //
 //    @Override
 //    public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -90,6 +93,31 @@ public class RegisterActivity extends AppCompatActivity {
 //                break;
 //        }
 //    }
+
+    private WifiP2pManager.PeerListListener peerListListener = new WifiP2pManager.PeerListListener() {
+        @Override
+        public void onPeersAvailable(WifiP2pDeviceList peerList) {
+
+            List<WifiP2pDevice> refreshedPeers = (ArrayList<WifiP2pDevice>) peerList.getDeviceList();
+            if (!refreshedPeers.equals(peers)) {
+                peers.clear();
+                peers.addAll(refreshedPeers);
+
+//                // If an AdapterView is backed by this data, notify it
+//                // of the change. For instance, if you have a ListView of
+//                // available peers, trigger an update.
+//                ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
+
+                // Perform any other updates needed based on the new list of
+                // peers connected to the Wi-Fi P2P network.
+            }
+
+            if (peers.size() == 0) {
+                Log.d(TAG, "No devices found");
+                return;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +136,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Initializing the database
         mDatabase = FirebaseDatabase.getInstance().getReference("test");
         final DatabaseReference mUserItems = mDatabase.child("testUser");
-        // Test connection
 
 //        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
 //        connectedRef.addValueEventListener(new ValueEventListener() {
@@ -147,20 +174,20 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-//        // Initialize wifi P2P connection
-//        // Indicates a change in the Wi-Fi P2P status.
-//        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
-//
-//        // Indicates a change in the list of available peers.
-//        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-//
-//        // Indicates the state of Wi-Fi P2P connectivity has changed.
-//        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-//
-//        // Indicates this device's details have changed.
-//        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
-//        manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
-//        channel = manager.initialize(this, getMainLooper(), null);
+        // Initialize wifi P2P connection
+        // Indicates a change in the Wi-Fi P2P status.
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+
+        // Indicates a change in the list of available peers.
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+
+        // Indicates the state of Wi-Fi P2P connectivity has changed.
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+
+        // Indicates this device's details have changed.
+        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
+        manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        channel = manager.initialize(this, getMainLooper(), null);
 
 
         // Submit button
@@ -188,6 +215,23 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
                     }
                 }
+
+                manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
+
+                    @Override
+                    public void onSuccess() {
+                        // Code for when the discovery initiation is successful goes here.
+                        // No services have actually been discovered yet, so this method
+                        // can often be left blank. Code for peer discovery goes in the
+                        // onReceive method, detailed below.
+                    }
+
+                    @Override
+                    public void onFailure(int reasonCode) {
+                        // Code for when the discovery initiation fails goes here.
+                        // Alert the user that something went wrong.
+                    }
+                });
 
                 // Discovering devices with bluetooth
 
@@ -280,19 +324,19 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-//
-//    /** register the BroadcastReceiver with the intent values to be matched */
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        receiver = new WiFiDirectBroadcastReceiver(manager, channel, this);
-//        registerReceiver(receiver, intentFilter);
-//    }
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        unregisterReceiver(receiver);
-//    }
+
+    /** register the BroadcastReceiver with the intent values to be matched */
+    @Override
+    public void onResume() {
+        super.onResume();
+        receiver = new WiFiDirectBroadcastReceiver(manager, channel, this);
+        registerReceiver(receiver, intentFilter);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
 //
 //    /**
 //     * Remove all peers and clear all fields. This is called on
@@ -367,19 +411,19 @@ public class RegisterActivity extends AppCompatActivity {
 //    }
 //
 //    @Override
-//    public void connect(WifiP2pConfig config) {
-//        manager.connect(channel, config, new ActionListener() {
-//            @Override
-//            public void onSuccess() {
-//                // WiFiDirectBroadcastReceiver will notify us. Ignore for now.
-//            }
-//            @Override
-//            public void onFailure(int reason) {
-//                Toast.makeText(RegisterActivity.this, "Connect failed. Retry.",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    public void connect(WifiP2pConfig config) {
+        manager.connect(channel, config, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+                // WiFiDirectBroadcastReceiver will notify us. Ignore for now.
+            }
+            @Override
+            public void onFailure(int reason) {
+                Toast.makeText(RegisterActivity.this, "Connect failed. Retry.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 //    @Override
 //    public void disconnect() {
 //        final DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager()
