@@ -36,6 +36,13 @@ public class CloseRangeActivity extends AppCompatActivity {
         mFlashButton = (ImageButton) findViewById(R.id.flashlight);
         mVibrateButton = (ImageButton) findViewById(R.id.vibration);
 
+        mFlashButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         mVibrateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

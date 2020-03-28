@@ -2,6 +2,8 @@ package com.example.tag;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
@@ -45,7 +47,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.net.NetworkInterface;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -63,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     // Bluetooth Connection
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//    private BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
 
     // Wifi P2P Connection
     private final IntentFilter intentFilter = new IntentFilter();
@@ -132,6 +137,26 @@ public class RegisterActivity extends AppCompatActivity {
         mDescriptionEditText = findViewById(R.id.itemDescription);
         mWifiSwitch = (Switch) findViewById(R.id.wifi_switch);
         mBTSwitch = (Switch) findViewById(R.id.bt_switch);
+
+//        // Get the default bluetoothAdapter to store bonded devices into a Set of BluetoothDevice(s)
+//        final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        // It will work if your bluetooth device is already bounded to your phone
+//        // If not, you can use the startDiscovery() method and connect to your device
+//        Set<BluetoothDevice> bluetoothDeviceSet = bluetoothAdapter.getBondedDevices();
+//
+//        for (BluetoothDevice bluetoothDevice : bluetoothDeviceSet) {
+//            bluetoothDevice.connectGatt(this, true, new BluetoothGattCallback() {
+//                @Override
+//                public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+//                    super.onConnectionStateChange(gatt, status, newState);
+//                }
+//                @Override
+//                public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
+//                    if(status == BluetoothGatt.GATT_SUCCESS)
+//                        Log.d("BluetoothRssi", String.format("BluetoothGat ReadRssi[%d]", rssi));
+//                }
+//            });
+//        }
 
         // Initializing the database
         mDatabase = FirebaseDatabase.getInstance().getReference("test");
@@ -215,6 +240,10 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
                     }
                 }
+
+//                registerReceiver(BTreceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
+//
+//                BTAdapter.startDiscovery();
 
                 manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
 
@@ -316,6 +345,8 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     Log.d(TAG, "SSID of the current WiFi network: " + wifiInfo.getSSID());
                 }
+
+                Log.d(TAG, "SSID of your wifi is: " + getMacAddr());
 //                if (wifiInfo.getSupplicantState() == SupplicantState.COMPLETED) {
 //                    ssid = wifiInfo.getSSID();
 //                }
@@ -323,6 +354,48 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+//    private final BroadcastReceiver BTreceiver = new BroadcastReceiver(){
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            String action = intent.getAction();
+//            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+//                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+//                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+//                Log.d(TAG, name + " => " + rssi + "dBm\n");
+//            }
+//        }
+//    };
+
+    public static String getMacAddr() {
+        try {
+            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface nif : all) {
+                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                byte[] macBytes = nif.getHardwareAddress();
+                if (macBytes == null) {
+                    return "";
+                }
+
+                StringBuilder res1 = new StringBuilder();
+                for (byte b : macBytes) {
+                    String hex = Integer.toHexString(b & 0xFF);
+                    if (hex.length() == 1)
+                        hex = "0".concat(hex);
+                    res1.append(hex.concat(":"));
+                }
+
+                if (res1.length() > 0) {
+                    res1.deleteCharAt(res1.length() - 1);
+                }
+                return res1.toString();
+            }
+        } catch (Exception ex) {
+        }
+        return "";
     }
 
     /** register the BroadcastReceiver with the intent values to be matched */
