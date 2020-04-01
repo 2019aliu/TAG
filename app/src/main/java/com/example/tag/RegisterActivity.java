@@ -223,7 +223,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = mNameEditText.getText().toString();
                 String description = mDescriptionEditText.getText().toString();
                 MyItem newItem = new MyItem(name, description, "00:99:C4:D1:CA:25", "00:b0:94:86:4e:6c");
-                mUserItems.child(name).setValue(newItem);
+                mUserItems.child(name).push().setValue(newItem);
                 Log.d(TAG, "You registered an item with name "
                         + name + " and description " + description);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
