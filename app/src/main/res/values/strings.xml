@@ -81,7 +81,7 @@
     <string name="found_dialog_message">Please confirm that you\'ve found your device</string>
     <string name="found_ok">Confirm</string>
     <string name="found_cancel">Cancel</string>
-    <!--    <string name="found_missing">Help</string>-->
+<!--    <string name="found_missing">Help</string>-->
 
     <string name="closerange_cold">Start walking around</string>
     <string name="closerange_medium">Getting closer…</string>
