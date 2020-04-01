@@ -31,10 +31,6 @@
             android:label="@string/title_activity_close_range"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".MainActivityAlt"
-            android:label="@string/title_activity_overlay"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".SearchActivity" />
