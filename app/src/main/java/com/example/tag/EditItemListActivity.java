@@ -2,25 +2,23 @@ package com.example.tag;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
-import android.widget.Toast;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class ListItemsActivity extends AppCompatActivity implements MyAdapter.ItemClickListener{
+
+public class EditItemListActivity extends AppCompatActivity implements MyAdapter.ItemClickListener {
     private RecyclerView mRecyclerView;
-//    private CardView mRecyclerView;
+    //    private CardView mRecyclerView;
     private MyAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private ArrayList<MyItem> myDataset;  // this will be a list of items
@@ -30,7 +28,7 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_items);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Find an Item");
+        toolbar.setTitle("Edit an Item");
         setSupportActionBar(toolbar);
         System.out.println(toolbar.getTitle());
 
@@ -43,15 +41,15 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvItems);
-//        mRecyclerView = (CardView) findViewById(R.id.rvItems);
-//        // use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
+//       mRecyclerView = (CardView) findViewById(R.id.rvItems);
+//       // use this setting to improve performance if you know that changes
+//       // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter= new MyAdapter(this, myDataset);
+        mAdapter = new MyAdapter(this, myDataset);
         mAdapter.setClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -82,4 +80,5 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
         mapIntent.putExtra("Destination_Long", -84.411220);
         startActivity(mapIntent);
     }
+
 }

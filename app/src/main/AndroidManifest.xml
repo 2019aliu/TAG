@@ -47,6 +47,10 @@
             android:label="@string/title_activity_list_items"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".EditItemListActivity"
+            android:label="EditItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme.NoActionBar" />

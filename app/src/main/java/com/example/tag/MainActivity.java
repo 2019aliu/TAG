@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Edit", Toast.LENGTH_SHORT).show();
-                Intent editIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                Intent editIntent = new Intent(MainActivity.this, EditItemListActivity.class);
                 startActivity(editIntent);
                 // Do something in response to button click
             }
