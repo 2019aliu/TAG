@@ -72,13 +72,12 @@ public class EditItemListActivity extends AppCompatActivity implements MyAdapter
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + mAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-        Intent mapIntent = new Intent(this, GPSFindActivity.class);
+        Intent editIntent = new Intent(this, EditActivity.class);
 
 
         //pass any variables in here using .putExtra(), most likely user information
-        mapIntent.putExtra("Destination_Lat", 33.794723);
-        mapIntent.putExtra("Destination_Long", -84.411220);
-        startActivity(mapIntent);
+        editIntent.putExtra("Item_Name", mAdapter.getItem(position));
+        startActivity(editIntent);
     }
 
 }
