@@ -8,86 +8,141 @@
     tools:context=".RegisterActivity"
     tools:showIn="@layout/activity_register">
 
-<!--    <TextView-->
-<!--        android:id="@+id/title_register"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="20sp"-->
-<!--        android:text="@string/registerTitle"-->
-<!--        android:textSize="30sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/title_register"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:padding="20sp"-->
+    <!--        android:text="@string/registerTitle"-->
+    <!--        android:textSize="30sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/nameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@android:dimen/notification_large_icon_width"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="301dp"
+        android:layout_marginEnd="344dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/nameLabel"
-        android:textSize="24sp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android android:autofillHints="The name of this item"
         android:id="@+id/itemName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_width="360dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="@string/item_name_hint"
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:singleLine="true"
-        app:layout_constraintStart_toStartOf="@+id/nameLabel"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
     <TextView
         android:id="@+id/descriptionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="307dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/descriptionLabel"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/itemName"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <EditText
+        android:autofillHints="A description of this item"
         android:id="@+id/itemDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="359dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="@string/item_desc_hint"
         android:inputType="textLongMessage"
-        app:layout_constraintStart_toStartOf="@+id/descriptionLabel"
+        app:layout_constraintBottom_toTopOf="@+id/submitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
 
     <Switch
         android:id="@+id/wifi_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@android:dimen/notification_large_icon_width"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="139dp"
         android:switchPadding="76dp"
         android:text="@string/item_wifi_switch"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_switch"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+        app:layout_constraintTop_toBottomOf="@+id/submitButton" />
 
     <Switch
         android:id="@+id/bt_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="138dp"
         android:switchPadding="@dimen/activity_horizontal_margin"
         android:text="@string/item_bt_switch"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wifi_switch" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="264dp"
+        android:layout_height="232dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginBottom="58dp"
+        android:contentDescription="@string/item_desc_hint"
+        app:layout_constraintBottom_toTopOf="@+id/itemName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/itemKeys_foreground" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="168dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="122dp"
+        android:layout_marginBottom="36dp"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
+        android:foregroundTint="#000C0B0B"
+        android:text="@string/button_register"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/wifi_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

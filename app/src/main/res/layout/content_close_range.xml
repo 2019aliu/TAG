@@ -34,9 +34,10 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="72dp"
-        android:layout_marginTop="@android:dimen/notification_large_icon_height"
+        android:layout_marginTop="92dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/powerCircle">
 
