@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 // implements WifiP2pManager.ChannelListener, DeviceListFragment.DeviceActionListener
@@ -85,19 +86,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void setIsWifiP2pEnabled(boolean isWifiP2pEnabled) {
         this.isWifiP2pEnabled = isWifiP2pEnabled;
     }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                                           int[] grantResults) {
-//        switch (requestCode) {
-//            case PERMISSIONS_REQUEST_CODE_ACCESS_FINE_LOCATION:
-//                if  (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-//                    Log.e(TAG, "Fine location permission is not granted!");
-//                    finish();
-//                }
-//                break;
-//        }
-//    }
 
     private WifiP2pManager.PeerListListener peerListListener = new WifiP2pManager.PeerListListener() {
         @Override
@@ -107,14 +95,6 @@ public class RegisterActivity extends AppCompatActivity {
             if (!refreshedPeers.equals(peers)) {
                 peers.clear();
                 peers.addAll(refreshedPeers);
-
-//                // If an AdapterView is backed by this data, notify it
-//                // of the change. For instance, if you have a ListView of
-//                // available peers, trigger an update.
-//                ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
-
-                // Perform any other updates needed based on the new list of
-                // peers connected to the Wi-Fi P2P network.
             }
 
             if (peers.size() == 0) {
@@ -138,66 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
         mWifiSwitch = (Switch) findViewById(R.id.wifi_switch);
         mBTSwitch = (Switch) findViewById(R.id.bt_switch);
 
-//        // Get the default bluetoothAdapter to store bonded devices into a Set of BluetoothDevice(s)
-//        final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//        // It will work if your bluetooth device is already bounded to your phone
-//        // If not, you can use the startDiscovery() method and connect to your device
-//        Set<BluetoothDevice> bluetoothDeviceSet = bluetoothAdapter.getBondedDevices();
-//
-//        for (BluetoothDevice bluetoothDevice : bluetoothDeviceSet) {
-//            bluetoothDevice.connectGatt(this, true, new BluetoothGattCallback() {
-//                @Override
-//                public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-//                    super.onConnectionStateChange(gatt, status, newState);
-//                }
-//                @Override
-//                public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
-//                    if(status == BluetoothGatt.GATT_SUCCESS)
-//                        Log.d("BluetoothRssi", String.format("BluetoothGat ReadRssi[%d]", rssi));
-//                }
-//            });
-//        }
-
         // Initializing the database
         mDatabase = FirebaseDatabase.getInstance().getReference("test");
         final DatabaseReference mUserItems = mDatabase.child("testUser");
-
-//        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
-//        connectedRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                boolean connected = snapshot.getValue(Boolean.class);
-//                if (connected) {
-//                    Log.d(TAG, "connected");
-//                } else {
-//                    Log.d(TAG, "not connected");
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.w(TAG, "Listener was cancelled");
-//            }
-//        });
-
-        // Read from the database
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String name = mNameEditText.getText().toString();
-                String description = mDescriptionEditText.getText().toString();
-                HashMap<String, Object> value = (HashMap<String, Object>) dataSnapshot.getValue();
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
 
         // Initialize wifi P2P connection
         // Indicates a change in the Wi-Fi P2P status.
@@ -220,15 +143,22 @@ public class RegisterActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Make a new item
                 String name = mNameEditText.getText().toString();
                 String description = mDescriptionEditText.getText().toString();
                 MyItem newItem = new MyItem(name, description, "00:99:C4:D1:CA:25", "00:b0:94:86:4e:6c");
-                mUserItems.child(name).push().setValue(newItem);
-                Log.d(TAG, "You registered an item with name "
-                        + name + " and description " + description);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
 
+                // Register it to the database
+                mDatabase.child(name).push();
+                mUserItems.child(name).updateChildren(newItem.toMap());
+
+                // Testing
+                //    new MyItem("Phone", "Galaxy S9", "E8:99:C4:D1:CA:25", "1c:b0:94:86:4e:6c")
+                //    new MyItem("Keys", "Dorm keys plus Explore lanyard", "00:00:00:00:00:00", "12:34:56:78:90:12")
+                //    new MyItem("Wallet", "Buzzcard, debit, and cash", "11:22:33:44:55:66", "13:24:35:46:57:68")
+                //    new MyItem("My sanity (rip)", "Help I've gone insane", "AA:BB:CC:DD:EE:FF", "10:29:38:47:56:65")
+
+                // Bluetooth Enabling
                 int REQUEST_ENABLE_BT = 1;
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
@@ -240,10 +170,6 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
                     }
                 }
-
-//                registerReceiver(BTreceiver, new IntentFilter(BluetoothDevice.ACTION_FOUND));
-//
-//                BTAdapter.startDiscovery();
 
                 manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
 
@@ -262,79 +188,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
 
-                // Discovering devices with bluetooth
-
-//                // Bluetooth discoverer: Create a BroadcastReceiver for ACTION_FOUND.
-//                final BroadcastReceiver receiver = new BroadcastReceiver() {
-//                    public void onReceive(Context context, Intent intent) {
-//                        String action = intent.getAction();
-//                        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-//                            // Discovery has found a device. Get the BluetoothDevice
-//                            // object and its info from the Intent.
-//                            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-////                            String deviceName = device.getName();
-////                            String deviceHardwareAddress = device.getAddress(); // MAC address
-//                            Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
-//                        }
-//                    }
-//                };
-//
-//
-//                // Register for broadcasts when a device is discovered.
-//                IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-//                registerReceiver(receiver, filter);
-//
-//                // Don't forget to unregister the ACTION_FOUND receiver.
-//                unregisterReceiver(receiver);
-
-
-
-
-
-//                /*
-//                My attempt at bluetooth scanning/
-//                References:
-//                - https://stuff.mit.edu/afs/sipb/project/android/docs/guide/topics/connectivity/bluetooth.html#FindingDevices
-//                - (Android official docs) https://developer.android.com/reference/android/bluetooth/BluetoothDevice
-//                - (Also official docs) https://developer.android.com/reference/android/bluetooth/BluetoothAdapter
-//                 */
-//
-//                final ArrayList<String> mArrayAdapter = new ArrayList<>();
-//
-//                // Bluetooth/Wifi Scanning
-//                if (mBTSwitch.isChecked()) {
-//                    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//                    // Create a BroadcastReceiver for ACTION_FOUND
-//                    // can't make it private in here for some reason oh well
-//                    final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-//                        public void onReceive(Context context, Intent intent) {
-//                            String action = intent.getAction();
-//                            // When discovery finds a device
-//                            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-//                                // Get the BluetoothDevice object from the Intent
-//                                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//                                // Add the name and address to an array adapter to show in a ListView
-//                                mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
-//                            }
-//                        }
-//                    };
-//                    // Register the BroadcastReceiver
-//                    IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-//                    registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
-//                    for (String item: mArrayAdapter) {
-//                        Log.d(TAG, item);
-//                    }
-//
-//
-////                    mBluetoothAdapter.getRemoteDevice("E8:99:C4:D1:CA:25");
-//
-////                    Log.d(TAG, "You want Bluetooth!");
-//                }
-
-//                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService (Context.WIFI_SERVICE);
-//                assert wifiManager != null;
-//                WifiInfo info = wifiManager.getConnectionInfo ();
-//                String ssid  = info.getSSID();
 
                 WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                 WifiInfo wifiInfo;
@@ -355,19 +208,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
-//    private final BroadcastReceiver BTreceiver = new BroadcastReceiver(){
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//
-//            String action = intent.getAction();
-//            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
-//                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
-//                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-//                Log.d(TAG, name + " => " + rssi + "dBm\n");
-//            }
-//        }
-//    };
 
     public static String getMacAddr() {
         try {
@@ -410,6 +250,34 @@ public class RegisterActivity extends AppCompatActivity {
         super.onPause();
         unregisterReceiver(receiver);
     }
+//
+//    @Override
+    public void connect(WifiP2pConfig config) {
+        manager.connect(channel, config, new WifiP2pManager.ActionListener() {
+            @Override
+            public void onSuccess() {
+                // WiFiDirectBroadcastReceiver will notify us. Ignore for now.
+            }
+            @Override
+            public void onFailure(int reason) {
+                Toast.makeText(RegisterActivity.this, "Connect failed. Retry.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+//    private final BroadcastReceiver BTreceiver = new BroadcastReceiver(){
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//
+//            String action = intent.getAction();
+//            if(BluetoothDevice.ACTION_FOUND.equals(action)) {
+//                int rssi = intent.getShortExtra(BluetoothDevice.EXTRA_RSSI,Short.MIN_VALUE);
+//                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
+//                Log.d(TAG, name + " => " + rssi + "dBm\n");
+//            }
+//        }
+//    };
+
 //
 //    /**
 //     * Remove all peers and clear all fields. This is called on
@@ -482,21 +350,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                .findFragmentById(R.id.frag_detail);
 //        fragment.showDetails(device);
 //    }
-//
-//    @Override
-    public void connect(WifiP2pConfig config) {
-        manager.connect(channel, config, new WifiP2pManager.ActionListener() {
-            @Override
-            public void onSuccess() {
-                // WiFiDirectBroadcastReceiver will notify us. Ignore for now.
-            }
-            @Override
-            public void onFailure(int reason) {
-                Toast.makeText(RegisterActivity.this, "Connect failed. Retry.",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+
 //    @Override
 //    public void disconnect() {
 //        final DeviceDetailFragment fragment = (DeviceDetailFragment) getFragmentManager()
@@ -611,4 +465,120 @@ public class RegisterActivity extends AppCompatActivity {
 //            }
 //        }
 //    }
+
+    //        // Get the default bluetoothAdapter to store bonded devices into a Set of BluetoothDevice(s)
+//        final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        // It will work if your bluetooth device is already bounded to your phone
+//        // If not, you can use the startDiscovery() method and connect to your device
+//        Set<BluetoothDevice> bluetoothDeviceSet = bluetoothAdapter.getBondedDevices();
+//
+//        for (BluetoothDevice bluetoothDevice : bluetoothDeviceSet) {
+//            bluetoothDevice.connectGatt(this, true, new BluetoothGattCallback() {
+//                @Override
+//                public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+//                    super.onConnectionStateChange(gatt, status, newState);
+//                }
+//                @Override
+//                public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
+//                    if(status == BluetoothGatt.GATT_SUCCESS)
+//                        Log.d("BluetoothRssi", String.format("BluetoothGat ReadRssi[%d]", rssi));
+//                }
+//            });
+//        }
 }
+
+// Unused code
+// Discovering devices with bluetooth
+
+//                // Bluetooth discoverer: Create a BroadcastReceiver for ACTION_FOUND.
+//                final BroadcastReceiver receiver = new BroadcastReceiver() {
+//                    public void onReceive(Context context, Intent intent) {
+//                        String action = intent.getAction();
+//                        if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+//                            // Discovery has found a device. Get the BluetoothDevice
+//                            // object and its info from the Intent.
+//                            BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+////                            String deviceName = device.getName();
+////                            String deviceHardwareAddress = device.getAddress(); // MAC address
+//                            Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
+//                        }
+//                    }
+//                };
+//
+//
+//                // Register for broadcasts when a device is discovered.
+//                IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+//                registerReceiver(receiver, filter);
+//
+//                // Don't forget to unregister the ACTION_FOUND receiver.
+//                unregisterReceiver(receiver);
+
+
+
+
+
+//                /*
+//                My attempt at bluetooth scanning/
+//                References:
+//                - https://stuff.mit.edu/afs/sipb/project/android/docs/guide/topics/connectivity/bluetooth.html#FindingDevices
+//                - (Android official docs) https://developer.android.com/reference/android/bluetooth/BluetoothDevice
+//                - (Also official docs) https://developer.android.com/reference/android/bluetooth/BluetoothAdapter
+//                 */
+//
+//                final ArrayList<String> mArrayAdapter = new ArrayList<>();
+//
+//                // Bluetooth/Wifi Scanning
+//                if (mBTSwitch.isChecked()) {
+//                    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//                    // Create a BroadcastReceiver for ACTION_FOUND
+//                    // can't make it private in here for some reason oh well
+//                    final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+//                        public void onReceive(Context context, Intent intent) {
+//                            String action = intent.getAction();
+//                            // When discovery finds a device
+//                            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+//                                // Get the BluetoothDevice object from the Intent
+//                                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//                                // Add the name and address to an array adapter to show in a ListView
+//                                mArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+//                            }
+//                        }
+//                    };
+//                    // Register the BroadcastReceiver
+//                    IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+//                    registerReceiver(mReceiver, filter); // Don't forget to unregister during onDestroy
+//                    for (String item: mArrayAdapter) {
+//                        Log.d(TAG, item);
+//                    }
+//
+//
+////                    mBluetoothAdapter.getRemoteDevice("E8:99:C4:D1:CA:25");
+//
+////                    Log.d(TAG, "You want Bluetooth!");
+//                }
+
+//                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService (Context.WIFI_SERVICE);
+//                assert wifiManager != null;
+//                WifiInfo info = wifiManager.getConnectionInfo ();
+//                String ssid  = info.getSSID();
+
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                                           int[] grantResults) {
+//        switch (requestCode) {
+//            case PERMISSIONS_REQUEST_CODE_ACCESS_FINE_LOCATION:
+//                if  (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+//                    Log.e(TAG, "Fine location permission is not granted!");
+//                    finish();
+//                }
+//                break;
+//        }
+//    }
+//                // If an AdapterView is backed by this data, notify it
+//                // of the change. For instance, if you have a ListView of
+//                // available peers, trigger an update.
+//                ((WiFiPeerListAdapter) getListAdapter()).notifyDataSetChanged();
+
+// Perform any other updates needed based on the new list of
+// peers connected to the Wi-Fi P2P network.
