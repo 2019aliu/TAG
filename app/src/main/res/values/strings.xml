@@ -50,7 +50,7 @@
     <!--    </string>-->
     <!--    <string name="attachment_summary_off">Only download attachments when manually requested</string>-->
 
-    <string name="btwifi_title">Please enable Bluetooth and/or Wifi to locate your device (turn on both for best results)</string>
+    <string name="btwifi_title">Please enable Bluetooth and/or Wifi to locate your device \n*turn on both for best results</string>
     <string name="btwifi_settings">Bluetooth/Wifi Settings</string>
     <string name="btwifi_checked">Locate Device</string>
     <string name="title_activity_login">Sign in</string>

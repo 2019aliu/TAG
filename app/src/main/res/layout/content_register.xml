@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E2E2E2"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".RegisterActivity"
     tools:showIn="@layout/activity_register">
+
 
     <!--    <TextView-->
     <!--        android:id="@+id/title_register"-->
@@ -29,6 +31,7 @@
         android:layout_marginEnd="344dp"
         android:layout_marginBottom="8dp"
         android:text="@string/nameLabel"
+        android:textColor="#F8070707"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/itemName"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,19 +39,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android android:autofillHints="The name of this item"
         android:id="@+id/itemName"
+        android
         android:layout_width="360dp"
         android:layout_height="52dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="24dp"
+        android:autofillHints="The name of this item"
+        android:backgroundTint="#000000"
         android:ems="10"
         android:hint="@string/item_name_hint"
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:singleLine="true"
+        android:textColorHint="#9F141414"
         app:layout_constraintBottom_toTopOf="@+id/descriptionLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +68,7 @@
         android:layout_marginEnd="307dp"
         android:layout_marginBottom="20dp"
         android:text="@string/descriptionLabel"
+        android:textColor="#050505"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/itemDescription"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,53 +76,27 @@
         app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <EditText
-        android:autofillHints="A description of this item"
         android:id="@+id/itemDescription"
         android:layout_width="359dp"
         android:layout_height="53dp"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="20dp"
+        android:autofillHints="A description of this item"
+        android:backgroundTint="#090808"
         android:ems="10"
         android:hint="@string/item_desc_hint"
         android:inputType="textLongMessage"
+        android:textColorHint="#9F141414"
         app:layout_constraintBottom_toTopOf="@+id/submitButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
 
-    <Switch
-        android:id="@+id/wifi_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="139dp"
-        android:switchPadding="76dp"
-        android:text="@string/item_wifi_switch"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/bt_switch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/submitButton" />
-
-    <Switch
-        android:id="@+id/bt_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="138dp"
-        android:switchPadding="@dimen/activity_horizontal_margin"
-        android:text="@string/item_bt_switch"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wifi_switch" />
-
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="264dp"
-        android:layout_height="232dp"
+        android:layout_width="228dp"
+        android:layout_height="175dp"
         android:layout_marginStart="74dp"
         android:layout_marginTop="39dp"
         android:layout_marginEnd="74dp"
@@ -125,22 +106,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/itemKeys_foreground" />
+        app:srcCompat="@drawable/circles_background" />
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="168dp"
         android:layout_height="53dp"
         android:layout_marginStart="122dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="122dp"
-        android:layout_marginBottom="36dp"
-        android:backgroundTint="@color/common_google_signin_btn_text_dark_focused"
+        android:backgroundTint="#F5302E2E"
         android:foregroundTint="#000C0B0B"
         android:text="@string/button_register"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/wifi_switch"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
 

@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:backgroundTint="#E8FEFEFF"
+    android:backgroundTint="#E2E2E2"
     android:foregroundTint="#00F5F5F5"
     tools:context=".LoggedOutActivity">
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="269dp"
-        android:layout_height="235dp"
+        android:layout_width="312dp"
+        android:layout_height="261dp"
         android:layout_marginStart="65dp"
         android:layout_marginTop="257dp"
         android:layout_marginEnd="65dp"
@@ -24,8 +24,10 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/TAGlogobackground" />
 
     <Button
@@ -35,7 +37,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="168dp"
         android:layout_marginEnd="24dp"
-        android:backgroundTint="#F5101111"
+        android:backgroundTint="#F5302E2E"
         android:foregroundTint="#85111010"
         android:text="@string/action_sign_in_short"
         android:textColor="#FFFCFC"
@@ -43,5 +45,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

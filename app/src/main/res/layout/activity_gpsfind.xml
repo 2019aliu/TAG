@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android android:id="@id/toolbar"
+        layout="@layout/toolbar"/>
+
     <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -15,10 +19,11 @@
         android:id="@+id/button_finishGPS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/finishGPSText"
-        android:theme="@style/AppTheme.Button"
         android:layout_gravity="bottom|center_horizontal"
-        android:textSize="12sp"
         android:layout_marginBottom="20sp"
-        android:width="100dp"/>
+        android:width="100dp"
+        android:backgroundTint="#A0A0A0"
+        android:text="@string/finishGPSText"
+        android:textSize="12sp"
+        android:theme="@style/AppTheme.Button" />
 </FrameLayout>

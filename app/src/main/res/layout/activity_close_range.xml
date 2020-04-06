@@ -15,12 +15,14 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#0D0D0E"
+            android:background="#F5302E2E"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_close_range" />
+    <include
+        layout="@layout/content_close_range"
+        android:background="#00E2E2E2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -28,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorSecondaryDark"
+        app:backgroundTint="#F5302E2E"
         app:srcCompat="@drawable/checkmark" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

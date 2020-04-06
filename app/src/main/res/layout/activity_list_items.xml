@@ -6,21 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ListItemsActivity">
 
+    <include
+        android android:id="@id/toolbar"
+        layout="@layout/toolbar"/>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"/>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_list_items" />
+    <include
+        layout="@layout/content_list_items"
+        android:backgroundTint="#E2E2E2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -28,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_search_category_default"
         android:tint="@color/offwhite"
-        app:backgroundTint="@color/colorSecondary"/>
+        app:backgroundTint="#F5302E2E"
+        app:srcCompat="@android:drawable/ic_search_category_default" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

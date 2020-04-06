@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E2E2E2"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".CloseRangeActivity"
     tools:showIn="@layout/activity_close_range">
@@ -31,41 +32,24 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_marginTop="92dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/powerCircle">
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="166dp"
+        android:layout_height="84dp"
+        android:background="#A0A0A0"
+        app:srcCompat="@mipmap/itemTaglight_foreground"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="440dp" />
 
-        <ImageButton
-            android:id="@+id/flashlight"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="36dp"
-            android:layout_marginEnd="12dp"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:backgroundTint="#45BFB7"
-            android:paddingStart="0dp"
-            android:paddingEnd="0dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/flashlight" />
 
-        <ImageButton
-            android:id="@+id/vibration"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="36dp"
-            android:layout_weight="1"
-            android:backgroundTint="#45BFB7"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/phone_vibrating" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="166dp"
+        android:layout_height="84dp"
+        android:background="#A0A0A0"
+        app:srcCompat="@mipmap/itemTagvibrate_foreground"
+        tools:layout_editor_absoluteX="217dp"
+        tools:layout_editor_absoluteY="440dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
