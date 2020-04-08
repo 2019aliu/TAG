@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tag.ui.login.LoginActivity;
+//import com.example.tag.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize all buttons
         mFindButton = (Button) findViewById(R.id.button3);
         mRegisterButton = (Button) findViewById(R.id.button4);
-        mEditButton = (Button) findViewById(R.id.button5);
+//        mEditButton = (Button) findViewById(R.id.button5);
 
         // Set listeners to open new intents in Android
         // Find
@@ -52,15 +52,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Edit
-        mEditButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Edit", Toast.LENGTH_SHORT).show();
-                Intent editIntent = new Intent(MainActivity.this, EditItemListActivity.class);
-                startActivity(editIntent);
-                // Do something in response to button click
-            }
-        });
+//        // Edit
+//        mEditButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "Edit", Toast.LENGTH_SHORT).show();
+//                Intent editIntent = new Intent(MainActivity.this, EditItemListActivity.class);
+//                startActivity(editIntent);
+//                // Do something in response to button click
+//            }
+//        });
     }
 }

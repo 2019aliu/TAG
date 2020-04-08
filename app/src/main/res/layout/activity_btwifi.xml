@@ -18,8 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="185dp"
-        android:layout_marginBottom="2dp"
         android:background="#F5302E2E"
         app:itemIconTint="#E2E2E2"
         app:itemTextColor="#E2E2E2"
@@ -27,6 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_BTWifiSettings"
+        app:layout_constraintVertical_bias="1.0"
         app:menu="@menu/bottom_nav_menu" />
 
     <TextView
@@ -34,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:baselineAligned="false"
+        android:gravity="center"
         android:padding="25dp"
         android:text="@string/btwifi_title"
         android:textColor="#F5302E2E"

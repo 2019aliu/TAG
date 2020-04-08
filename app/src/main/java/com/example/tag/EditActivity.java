@@ -48,8 +48,8 @@ public class EditActivity  extends AppCompatActivity  {
         // inflate all components, get the text
         mNameEditText = findViewById(R.id.itemName);
         mDescriptionEditText = findViewById(R.id.itemDescription);
-        mWifiSwitch = (Switch) findViewById(R.id.wifi_switch);
-        mBTSwitch = (Switch) findViewById(R.id.bt_switch);
+//        mWifiSwitch = (Switch) findViewById(R.id.wifi_switch);
+//        mBTSwitch = (Switch) findViewById(R.id.bt_switch);
 
         Bundle extras = getIntent().getExtras();
         String itemName = extras.getString("Item_Name");
@@ -86,10 +86,16 @@ public class EditActivity  extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String btAddress = "00:99:C4:D1:CA:25";
+                String wifiMAC = "00:b0:94:86:4e:6c";
+                String deviceName = "HTC One X";
+
+                // Make a new item
                 String name = mNameEditText.getText().toString();
                 String description = mDescriptionEditText.getText().toString();
-                MyItem newItem = new MyItem(name, description, "00:99:C4:D1:CA:25", "00:b0:94:86:4e:6c");
-                mUserItems.child(name).push().setValue(newItem);
+                MyItem newItem = new MyItem(name, description, btAddress, wifiMAC, deviceName);
+
+                mUserItems.child(deviceName).updateChildren(newItem.toMap());
                 Log.d(TAG, "You registered an item with name "
                         + name + " and description " + description);
 

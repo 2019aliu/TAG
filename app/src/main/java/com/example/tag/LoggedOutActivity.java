@@ -25,7 +25,7 @@ public class LoggedOutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoggedOutActivity.this, "Sign in", Toast.LENGTH_SHORT).show();
-                Intent findIntent = new Intent(LoggedOutActivity.this, loginActivity.class);
+                Intent findIntent = new Intent(LoggedOutActivity.this, LoginAltActivity.class);
                 startActivity(findIntent);
             }
         });
