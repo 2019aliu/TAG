@@ -1,4 +1,8 @@
 package com.example.tag;
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyItem {
     private String name;
@@ -6,12 +10,27 @@ public class MyItem {
     private String btAddress;
     private String wifiMAC;
     private boolean isSelected = false;
+    private double[] location = new double[2];
 
     public MyItem(String name, String description, String btAddress, String wifiMAC) {
         this.name = name;
         this.description = description;
         this.btAddress = btAddress;
         this.wifiMAC = wifiMAC;
+    }
+
+    public MyItem(HashMap<String, String> data) {
+        if (data == null) {
+            throw new IllegalArgumentException("Provided mapping for MyItem is null");
+        }
+        this.name = data.get("name");
+        this.description = data.get("description");
+        this.btAddress = data.get("btAddress");
+        this.wifiMAC = data.get("wifiMAC");
+        String locationRaw = data.get("location");
+        String[] locationCoordsRaw = locationRaw.replaceAll("[^0-9\\.\\- ]", "").toLowerCase().split("\\s+");
+        location[0] = Double.parseDouble(locationCoordsRaw[0]);
+        location[1] = Double.parseDouble(locationCoordsRaw[1]);
     }
 
     public String getName() {
@@ -52,5 +71,16 @@ public class MyItem {
 
     public boolean isSelected() {
         return isSelected;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("/name", name);
+        result.put("/description", description);
+        result.put("/btAddress", btAddress);
+        result.put("/wifiMAC", wifiMAC);
+        result.put("/selected", isSelected);
+        return result;
     }
 }
