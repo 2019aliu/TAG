@@ -10,14 +10,16 @@ public class MyItem {
     private String description;
     private String btAddress;
     private String wifiMAC;
+    private String device;
     private double[] location = new double[2];
     private boolean isSelected = false;
 
-    public MyItem(String name, String description, String btAddress, String wifiMAC) {
+    public MyItem(String name, String description, String btAddress, String wifiMAC, String device) {
         this.name = name;
         this.description = description;
         this.btAddress = btAddress;
         this.wifiMAC = wifiMAC;
+        this.device = device;
     }
 
     public MyItem(HashMap<String, String> data) {
@@ -28,6 +30,7 @@ public class MyItem {
         this.description = data.get("description");
         this.btAddress = data.get("btAddress");
         this.wifiMAC = data.get("wifiMAC");
+        this.device = data.get("device");
         String locationRaw = data.get("location");
         String[] locationCoordsRaw = locationRaw.replaceAll("[^0-9\\.\\- ]", "").toLowerCase().split("\\s+");
         location[0] = Double.parseDouble(locationCoordsRaw[0]);
@@ -66,6 +69,14 @@ public class MyItem {
         this.wifiMAC = wifiMAC;
     }
 
+    public String getDevice() {
+        return this.device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
     public void setSelected(boolean selected) {
         isSelected = selected;
     }
@@ -101,6 +112,7 @@ public class MyItem {
         result.put("/description", description);
         result.put("/btAddress", btAddress);
         result.put("/wifiMAC", wifiMAC);
+        result.put("/device", device);
         result.put("/selected", isSelected);
         return result;
     }
