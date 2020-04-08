@@ -1,8 +1,10 @@
 package com.example.tag;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +32,7 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
     private RecyclerView mRecyclerView;
     //    private CardView mRecyclerView;
     private MyAdapter mAdapter;
-    private LinearLayoutManager mLayoutManager;
+    private GridLayoutManager mLayoutManager;
     private ArrayList<MyItem> myDataset = new ArrayList<>();  // this will be a list of items
 
     // Databasing
@@ -62,12 +65,16 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
                 }
 
                 mRecyclerView = findViewById(R.id.rvItems);
-                //        mRecyclerView = (CardView) findViewById(R.id.rvItems);
-                //        // use this setting to improve performance if you know that changes
-                //        // in content do not change the layout size of the RecyclerView
+                // use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
                 mRecyclerView.setHasFixedSize(true);
+                int spanCount = 3; // 3 columns
+                int spacing = 50; // 50px
+                boolean includeEdge = true;
+                mRecyclerView.addItemDecoration(new SpacesItemDecoration(spanCount, spacing, includeEdge));
 
-                mLayoutManager = new LinearLayoutManager(ListItemsActivity.this);
+//                int mNoOfColumns = Utility.calculateNoOfColumns(getApplicationContext());
+                mLayoutManager = new GridLayoutManager(ListItemsActivity.this, 2);
                 mRecyclerView.setLayoutManager(mLayoutManager);
 
                 mAdapter = new MyAdapter(ListItemsActivity.this, myDataset);
@@ -126,3 +133,11 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
     }
 }
 
+//class Utility {
+//    public static int calculateNoOfColumns(Context context, float columnWidthDp) { // For example columnWidthdp=180
+//        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+//        float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;
+//        int noOfColumns = (int) (screenWidthDp / columnWidthDp + 0.5); // +0.5 for correct rounding to int.
+//        return noOfColumns;
+//    }
+//}

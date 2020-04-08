@@ -28,6 +28,7 @@ import com.example.tag.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
+//    private static final String[] DUMMY_CREDENTIALS = {"foo@example.com:hello", "bar@example.com:world"};
     private LoginViewModel loginViewModel;
 
     @Override

@@ -149,7 +149,6 @@ public class RegisterActivity extends AppCompatActivity {
                 MyItem newItem = new MyItem(name, description, "00:99:C4:D1:CA:25", "00:b0:94:86:4e:6c");
 
                 // Register it to the database
-                mDatabase.child(name).push();
                 mUserItems.child(name).updateChildren(newItem.toMap());
 
                 // Testing
