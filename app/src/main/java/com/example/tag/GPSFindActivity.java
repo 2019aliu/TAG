@@ -80,6 +80,8 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
     /*
     Process for initializing the Map Activity
      */
+    private Button doneButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +90,20 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        // Initialize all buttons
+        doneButton = (Button) findViewById(R.id.button_finishGPS);
+
+        // Set listeners to open new intents in Android
+        // Find
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(GPSFindActivity.this, "Location Found", Toast.LENGTH_SHORT).show();
+                Intent findIntent = new Intent(GPSFindActivity.this,BTWifiActivity.class);
+                startActivity(findIntent);
+            }
+        });
 
         // set up finish button
         mFinishGPS = (Button) findViewById(R.id.button_finishGPS);

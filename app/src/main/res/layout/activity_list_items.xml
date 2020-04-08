@@ -11,16 +11,16 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#F5302E2E"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_list_items" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#F5302E2E"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -31,5 +31,7 @@
         android:tint="@color/offwhite"
         app:backgroundTint="#F5302E2E"
         app:srcCompat="@android:drawable/ic_input_add" />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -124,6 +124,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
+    private Button registerButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -135,6 +137,20 @@ public class RegisterActivity extends AppCompatActivity {
         // inflate all components, get the text
         mNameEditText = findViewById(R.id.itemName);
         mDescriptionEditText = findViewById(R.id.itemDescription);
+
+        // Initialize all buttons
+        registerButton = (Button) findViewById(R.id.registerButton);
+
+        // Set listeners to open new intents in Android
+        // Find
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                Intent findIntent = new Intent(RegisterActivity.this, ListItemsActivity.class);
+                startActivity(findIntent);
+            }
+        });
 
 //        // Get the default bluetoothAdapter to store bonded devices into a Set of BluetoothDevice(s)
 //        final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

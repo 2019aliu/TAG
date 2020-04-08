@@ -1,5 +1,6 @@
 package com.example.tag;
 
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,7 @@ public class loginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(loginActivity.this, "Sign In", Toast.LENGTH_SHORT).show();
+                Toast.makeText(loginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                 Intent findIntent = new Intent(loginActivity.this, ListItemsActivity.class);
                 startActivity(findIntent);
             }

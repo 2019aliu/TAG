@@ -30,7 +30,7 @@
             android:name=".ListItemsActivity"
             android:label="@string/title_activity_list_items"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".edititem" />
+        <activity android:name=".EditItem" />
         <activity
             android:name=".bottomNav"
             android:label="@string/title_activity_bottom_nav" />

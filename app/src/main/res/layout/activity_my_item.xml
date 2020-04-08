@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E2E2E2"
     tools:context=".editItem">
 
     <ImageView
@@ -25,7 +26,7 @@
 
     <include
         android:id="@id/toolbar"
-        layout="@layout/toolbar"/>
+        layout="@layout/toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -42,10 +43,10 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/mapButton"
         android:layout_width="200dp"
         android:layout_height="75dp"
-        android:layout_marginStart="105dp"
+        android:layout_marginStart="106dp"
         android:layout_marginTop="59dp"
         android:layout_marginEnd="106dp"
         android:layout_marginBottom="169dp"
@@ -57,11 +58,12 @@
         tools:srcCompat="@drawable/ic_location_grey_24dp" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/editButton"
         android:layout_width="65dp"
         android:layout_height="63dp"
         android:layout_marginStart="346dp"
         android:layout_marginTop="11dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="550dp"
         android:backgroundTint="#F5302E2E"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
