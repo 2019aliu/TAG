@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -104,35 +102,35 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
         });
     }
 
-     @Override
-     public void onItemClick(View view, int position) throws ExecutionException, InterruptedException {
-         MyItem itemSelected = mAdapter.getItem(position);
-         Toast.makeText(this, "You clicked " + itemSelected.getName() + " on row number " + position, Toast.LENGTH_SHORT).show();
+    @Override
+    public void onItemClick(View view, int position) throws ExecutionException, InterruptedException {
+        MyItem itemSelected = mAdapter.getItem(position);
+        Toast.makeText(this, "You clicked " + itemSelected.getName() + " on row number " + position, Toast.LENGTH_SHORT).show();
 
-         //Create a Uri from an intent string. Use the result to create an Intent.
-         double destLatitude = itemSelected.getLatitude();
-         double destLongitude = itemSelected.getLongitude();
-         System.out.println(String.format("Latitude: %s, Longitude: %s", destLatitude, destLongitude));
-         String queryDestination = String.format("%s, %s", destLatitude, destLongitude);
-         //String queryDestination = String.format("9908 Mill Run Drive, Great Falls");
-         Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s", queryDestination));
+        // Create a Uri from an intent string. Use the result to create an Intent.
+        double destLatitude = itemSelected.getLatitude();
+        double destLongitude = itemSelected.getLongitude();
+        System.out.println(String.format("Latitude: %s, Longitude: %s", destLatitude, destLongitude));
+        String queryDestination = String.format("%s, %s", destLatitude, destLongitude);
+//        String queryDestination = String.format("9908 Mill Run Drive, Great Falls");
+        Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s", queryDestination));
 
-         //Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-         //Make the Intent explicit by setting the Google Maps package
-         mapIntent.setPackage("com.google.android.apps.maps");
+        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        // Make the Intent explicit by setting the Google Maps package
+        mapIntent.setPackage("com.google.android.apps.maps");
 
-         //Attempt to start an activity that can handle the Intent
-         if (mapIntent.resolveActivity(getPackageManager()) != null) {
-             //Open up the next activity first
-             Intent BTWifiIntent = new Intent(this, BTWifiActivity.class);
-             startActivity(BTWifiIntent);
-             //And then open up Google Maps
-             startActivity(mapIntent);
+        // Attempt to start an activity that can handle the Intent
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            // Open up the next activity first
+            Intent BTWifiIntent = new Intent(this, BTWifiActivity.class);
+            startActivity(BTWifiIntent);
+            // And then open up Google Maps
+            startActivity(mapIntent);
         }
 
-     }
- }
+    }
+}
 
 //class Utility {
 //    public static int calculateNoOfColumns(Context context, float columnWidthDp) { // For example columnWidthdp=180

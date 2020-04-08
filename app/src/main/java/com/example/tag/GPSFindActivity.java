@@ -1,18 +1,31 @@
 package com.example.tag;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.tag.gps.AppConstants;
+import com.example.tag.gps.GpsUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,6 +48,7 @@ import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -47,35 +61,15 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
     double originLat = 0.0;
     double originLng = 0.0;
 
-    private Button mFinishGPS;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private double wayLatitude = 0.0;
+    private double wayLongitude = 0.0;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+    private boolean isContinue = false;
+    private boolean isGPS = false;
 
-    /*
-    Get current location
-    Using LocationManager
-     */
-//    private final LocationListener mLocationListener = new LocationListener() {
-//        @Override
-//        public void onLocationChanged(final Location location) {
-//            originLat = location.getLatitude();
-//            originLng = location.getLongitude();
-//            System.out.println();
-//        }
-//
-//        @Override
-//        public void onStatusChanged(String provider, int status, Bundle extras) {
-//
-//        }
-//
-//        @Override
-//        public void onProviderEnabled(String provider) {
-//
-//        }
-//
-//        @Override
-//        public void onProviderDisabled(String provider) {
-////            Toast.makeText(this, "Please Enable GPS and Internet", Toast.LENGTH_SHORT).show();
-//        }
-//    };
+    private Button mFinishGPS;
 
     /*
     Process for initializing the Map Activity
@@ -91,57 +85,21 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        // Initialize all buttons
-        doneButton = (Button) findViewById(R.id.button_finishGPS);
-
-        // Set listeners to open new intents in Android
-        // Find
-        doneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(GPSFindActivity.this, "Location Found", Toast.LENGTH_SHORT).show();
-                Intent findIntent = new Intent(GPSFindActivity.this,BTWifiActivity.class);
-                startActivity(findIntent);
-            }
-        });
+//        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+//                Uri.parse("https://www.google.com/maps/dir/?api=1&origin=Space+Needle+Seattle+WA&destination=Pike+Place+Market+Seattle+WA&travelmode=bicycling"));
+//        startActivity(intent);
 
         // set up finish button
         mFinishGPS = (Button) findViewById(R.id.button_finishGPS);
         mFinishGPS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(GPSFindActivity.this, "Finished Map", Toast.LENGTH_SHORT).show();
-//                Intent settingsIntent = new Intent(GPSFindActivity.this, SettingsActivity.class);
-//                //pass any variables in here using .putExtra(), most likely user information
-//                startActivity(settingsIntent);
-
                 Intent btWifiIntent = new Intent(GPSFindActivity.this, BTWifiActivity.class);
                 //pass any variables in here using .putExtra(), most likely user information
                 startActivity(btWifiIntent);
 
             }
         });
-
-        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-//                        System.out.println("Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude());
-                        if (location != null) {
-                            // Logic to handle location object
-                            System.out.println("Current: Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude());
-                            originLat = location.getLatitude();
-                            originLng = location.getLongitude();
-                        }
-                    }
-                });
-
-//        // get current location
-//        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-//
-//        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
-//                LOCATION_REFRESH_DISTANCE, mLocationListener);
     }
 
     /**
@@ -163,14 +121,52 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
             destLat = extras.getDouble("Destination_Lat");
             destLong = extras.getDouble("Destination_Long");
         }
-//        String origin = "" + originLat + ", " + originLng;
-        String origin = "33.776673, -84.396114";
+
+        // Maps setup
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(10 * 1000); // 10 seconds
+        locationRequest.setFastestInterval(5 * 1000); // 5 seconds
+
+        new GpsUtils(this).turnGPSOn(new GpsUtils.onGpsListener() {
+            @Override
+            public void gpsStatus(boolean isGPSEnable) {
+                // turn on GPS
+                isGPS = isGPSEnable;
+            }
+        });
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    if (location != null) {
+                        wayLatitude = location.getLatitude();
+                        wayLongitude = location.getLongitude();
+                        if (!isContinue && mFusedLocationClient != null) {
+                            mFusedLocationClient.removeLocationUpdates(locationCallback);
+                        }
+                    }
+                }
+            }
+        };
+
+        getLocation();
+
+        String origin = "" + wayLatitude + ", " + wayLongitude;
+//        String origin = "33.776673, -84.396114";
         String destination = "" + destLat + ", " + destLong;
+        System.out.println(origin);
         System.out.println(destination);
 
         setupGoogleMapScreenSettings(mMap);
 //        DirectionsResult results = getDirectionsDetails("483 George St, Sydney NSW 2000, Australia","182 Church St, Parramatta NSW 2150, Australia",TravelMode.DRIVING);
         DirectionsResult results = getDirectionsDetails(origin, destination, TravelMode.DRIVING);
+        System.out.println();
         if (results != null) {
             // add other checks in here
             // such as if the destination is literally impossible to get to
@@ -180,11 +176,6 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
             addMarkersToMap(results, googleMap);
         }
     }
-
-
-    /*
-
-     */
 
     private void setupGoogleMapScreenSettings(GoogleMap mMap) {
         mMap.setBuildingsEnabled(true);
@@ -243,13 +234,69 @@ public class GPSFindActivity extends FragmentActivity implements OnMapReadyCallb
                 .setWriteTimeout(1, TimeUnit.SECONDS);
     }
 
-//    void getLocation() {
-//        try {
-//            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, this);
-//        }
-//        catch(SecurityException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    /**
+     * Map Functions
+     */
+
+    private void getLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    AppConstants.LOCATION_REQUEST);
+
+        } else {
+            if (isContinue) {
+                mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+            } else {
+                mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                    if (location != null) {
+                        wayLatitude = location.getLatitude();
+                        wayLongitude = location.getLongitude();
+                    } else {
+                        mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+                    }
+                });
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1000: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (isContinue) {
+                        mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+                    } else {
+                        mFusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+                            if (location != null) {
+                                wayLatitude = location.getLatitude();
+                                wayLongitude = location.getLongitude();
+                            } else {
+                                mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+                            }
+                        });
+                    }
+                } else {
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == AppConstants.GPS_REQUEST) {
+                isGPS = true; // flag maintain before get location
+            }
+        }
+    }
 }

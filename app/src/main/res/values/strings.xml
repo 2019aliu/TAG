@@ -7,12 +7,8 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_gpsfind">Map</string>
     <string name="title_activity_list_items">ListItemsActivity</string>
-    <string name="rvItems">ItemRecyclerView</string>
-    <string name="tvItem">ItemRow</string>
-    <string name="registerTitle">Register</string>
     <string name="nameLabel">Name</string>
     <string name="descriptionLabel">Description</string>
-    <string name="registerButton">Register</string>
     <string name="finishGPSText">Done</string>
     <string name="title_activity_settings">Settings</string>
 
@@ -62,20 +58,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_overlay">OverlayActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
     <string name="title_activity_close_range">CloseRangeActivity</string>
     <string name="found_dialog_title">Confirm Retrieved Device</string>
     <string name="found_dialog_message">Please confirm that you\'ve found your device</string>
@@ -90,4 +73,10 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="confirmString">Confirm</string>
+    <string name="cancelString">Cancel</string>
+<!--    <string name="found_missing">Help</string>-->
+
+    <string name="listItemsFinish_title">Finish Maps</string>
+    <string name="listItemsFinish_message">Please confirm that you\'ve finished directions with Maps</string>
 </resources>
