@@ -32,24 +32,21 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="166dp"
-        android:layout_height="84dp"
-        android:background="#A0A0A0"
-        app:srcCompat="@mipmap/itemTaglight_foreground"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="440dp" />
-
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="166dp"
-        android:layout_height="84dp"
-        android:background="#A0A0A0"
-        app:srcCompat="@mipmap/itemTagvibrate_foreground"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="440dp" />
+    <Button
+        android:id="@+id/founditem"
+        android:layout_width="177dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginBottom="138dp"
+        android:backgroundTint="#F5302E2E"
+        android:text="@string/found_ok"
+        android:textColor="#E2E2E2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

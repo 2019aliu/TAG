@@ -9,33 +9,11 @@
     android:foregroundTint="#00F5F5F5"
     tools:context=".LoggedOutActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="312dp"
-        android:layout_height="261dp"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="257dp"
-        android:layout_marginEnd="65dp"
-        android:layout_marginBottom="257dp"
-        android:adjustViewBounds="false"
-        android:backgroundTint="#00FFFFFF"
-        android:contentDescription="@string/welcome"
-        android:cropToPadding="false"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@mipmap/TAGlogobackground" />
-
     <Button
-        android:id="@+id/LOG IN"
+        android:id="@+id/login"
         android:layout_width="415dp"
-        android:layout_height="85dp"
+        android:layout_height="75dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="168dp"
         android:layout_marginEnd="24dp"
         android:backgroundTint="#F5302E2E"
         android:foregroundTint="#85111010"
@@ -43,7 +21,20 @@
         android:textColor="#FFFCFC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="393dp"
+        android:layout_height="384dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="121dp"
+        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/itemtaglogo_foreground" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

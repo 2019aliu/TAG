@@ -15,13 +15,9 @@
 
     <include
         android:id="@id/toolbar"
-        android
         layout="@layout/toolbar"
-        android:layout_marginBottom="192dp"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="-24dp"
+        tools:layout_editor_absoluteY="631dp" />
 
     <EditText
         android:id="@+id/username"
@@ -62,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/signin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -96,19 +92,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="168dp"
-        android:layout_height="141dp"
-        android:layout_marginStart="95dp"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="95dp"
-        android:layout_marginBottom="58dp"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@mipmap/TAGlogobackground" />
 </androidx.constraintlayout.widget.ConstraintLayout>

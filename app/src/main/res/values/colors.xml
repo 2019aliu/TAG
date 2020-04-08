@@ -5,8 +5,8 @@
     <color name="colorPrimaryLight">#7fadff</color>
     <color name="colorSecondary">#5A30FF</color>
     <color name="colorSecondaryDark">#0000CA</color>
-    <color name="colorSecondaryLight">#9861FF</color>
-    <color name="colorAccent">#FF7157</color>
+    <color name="colorSecondaryLight">#E2E2E2</color>
+    <color name="colorAccent">#E2E2E2</color>
 <!--    <color name="colorAccent">#5a30ff</color>-->
     <color name="offwhite">#DDDDDD</color>
     <color name="colorError">#B00020</color>

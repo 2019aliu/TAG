@@ -40,7 +40,6 @@
 
     <EditText
         android:id="@+id/itemName"
-        android
         android:layout_width="360dp"
         android:layout_height="52dp"
         android:layout_marginStart="26dp"
@@ -88,13 +87,13 @@
         android:hint="@string/item_desc_hint"
         android:inputType="textLongMessage"
         android:textColorHint="#9F141414"
-        app:layout_constraintBottom_toTopOf="@+id/submitButton"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/newitemimage"
         android:layout_width="228dp"
         android:layout_height="175dp"
         android:layout_marginStart="74dp"
@@ -104,12 +103,14 @@
         android:contentDescription="@string/item_desc_hint"
         app:layout_constraintBottom_toTopOf="@+id/itemName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/circles_background" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@drawable/circles_background" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/registerButton"
         android:layout_width="168dp"
         android:layout_height="53dp"
         android:layout_marginStart="122dp"

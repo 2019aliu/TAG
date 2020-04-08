@@ -12,8 +12,7 @@
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/colorPrimaryDark</item>
-        <item name="android:textColor">@color/offwhite</item>
-        <item name="android:background">@drawable/rounded_shape</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

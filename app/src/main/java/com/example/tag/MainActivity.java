@@ -25,10 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initialize all buttons
-        mFindButton = (Button) findViewById(R.id.button_find);
-        mRegisterButton = (Button) findViewById(R.id.button_register);
-        mEditButton = (Button) findViewById(R.id.button_edit);
-        mTestButton = (Button) findViewById(R.id.button_test);
+        mFindButton = (Button) findViewById(R.id.button3);
+        mRegisterButton = (Button) findViewById(R.id.button4);
+        mEditButton = (Button) findViewById(R.id.button5);
 
         // Set listeners to open new intents in Android
         // Find
@@ -61,14 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent editIntent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
                 startActivity(editIntent);
                 // Do something in response to button click
-            }
-        });
-
-        mTestButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent testIntent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(testIntent);
             }
         });
     }

@@ -1,29 +1,42 @@
 package com.example.tag;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class ListItemsActivity extends AppCompatActivity implements MyAdapter.ItemClickListener{
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
+public abstract class ListItemsActivity extends AppCompatActivity implements MyAdapter.ItemClickListener {
+    final String TAG = "ListItemsActivity";
     private RecyclerView mRecyclerView;
-//    private CardView mRecyclerView;
+    //    private CardView mRecyclerView;
     private MyAdapter mAdapter;
-    private LinearLayoutManager mLayoutManager;
-    private ArrayList<MyItem> myDataset;  // this will be a list of items
+    private GridLayoutManager mLayoutManager;
+    private ArrayList<MyItem> myDataset = new ArrayList<>();  // this will be a list of items
+
+    // Databasing
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,52 +46,98 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
         toolbar.setTitle("Find an Item");
         setSupportActionBar(toolbar);
 
-        myDataset = new ArrayList<>();
-        // Populate the arraylist with a bunch of items
-        myDataset.add(new MyItem("Phone", "Galaxy S9", "E8:99:C4:D1:CA:25", "1c:b0:94:86:4e:6c"));
-        myDataset.add(new MyItem("Keys", "Dorm keys plus Explore lanyard", "00:00:00:00:00:00", "12:34:56:78:90:12"));
-        myDataset.add(new MyItem("Wallet", "Buzzcard, debit, and cash", "11:22:33:44:55:66", "13:24:35:46:57:68"));
-        myDataset.add(new MyItem("My sanity (rip)", "Help I've gone insane", "AA:BB:CC:DD:EE:FF", "10:29:38:47:56:65"));
+        // Initializing the database
+        mDatabase = FirebaseDatabase.getInstance().getReference("test");
+        final DatabaseReference mUserItems = mDatabase.child("testUser");
 
+        // Read from the database
+        mUserItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                HashMap<String, HashMap<String, String>> items =
+                        (HashMap<String, HashMap<String, String>>) dataSnapshot.getValue();
+                // Populate the arraylist with a bunch of items
+                for (String itemName: items.keySet()) {
+                    MyItem item = new MyItem(items.get(itemName));
+                    myDataset.add(item);
+                }
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rvItems);
-//        mRecyclerView = (CardView) findViewById(R.id.rvItems);
-//        // use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
+                mRecyclerView = findViewById(R.id.rvItems);
+                // use this setting to improve performance if you know that changes
+                // in content do not change the layout size of the RecyclerView
+                mRecyclerView.setHasFixedSize(true);
+                int spanCount = 3; // 3 columns
+                int spacing = 50; // 50px
+                boolean includeEdge = true;
+                mRecyclerView.addItemDecoration(new SpacesItemDecoration(spanCount, spacing, includeEdge));
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+//                int mNoOfColumns = Utility.calculateNoOfColumns(getApplicationContext());
+                mLayoutManager = new GridLayoutManager(ListItemsActivity.this, 2);
+                mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter= new MyAdapter(this, myDataset);
-        mAdapter.setClickListener(this);
-        mRecyclerView.setAdapter(mAdapter);
+                mAdapter = new MyAdapter(ListItemsActivity.this, myDataset);
+                mAdapter.setClickListener(ListItemsActivity.this);
+                mRecyclerView.setAdapter(mAdapter);
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),
-                mLayoutManager.getOrientation());
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
+                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+                        mRecyclerView.getContext(),
+                        mLayoutManager.getOrientation());
+                mRecyclerView.addItemDecoration(dividerItemDecoration);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + mAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
-        Intent mapIntent = new Intent(this, GPSFindActivity.class);
+    // @Override
+    // public void onItemClick(View view, int position) throws ExecutionException, InterruptedException {
+        // MyItem itemSelected = mAdapter.getItem(position);
+        // Toast.makeText(this, "You clicked " + itemSelected.getName() + " on row number " + position, Toast.LENGTH_SHORT).show();
 
+        // Create a Uri from an intent string. Use the result to create an Intent.
+        // double destLatitude = itemSelected.getLatitude();
+        // double destLongitude = itemSelected.getLongitude();
+        // System.out.println(String.format("Latitude: %s, Longitude: %s", destLatitude, destLongitude));
+        // String queryDestination = String.format("%s, %s", destLatitude, destLongitude);
+        // String queryDestination = String.format("9908 Mill Run Drive, Great Falls");
+        // Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s", queryDestination));
 
-        //pass any variables in here using .putExtra(), most likely user information
-        mapIntent.putExtra("Destination_Lat", 33.794723);
-        mapIntent.putExtra("Destination_Long", -84.411220);
-        startActivity(mapIntent);
-    }
-}
+        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+        // Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        // Make the Intent explicit by setting the Google Maps package
+        // mapIntent.setPackage("com.google.android.apps.maps");
+
+        // Attempt to start an activity that can handle the Intent
+        // if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            // Open up the next activity first
+            // Intent BTWifiIntent = new Intent(this, BTWifiActivity.class);
+            // startActivity(BTWifiIntent);
+            // And then open up Google Maps
+            // startActivity(mapIntent);
+        }
+
+    // }
+// }
+
+//class Utility {
+//    public static int calculateNoOfColumns(Context context, float columnWidthDp) { // For example columnWidthdp=180
+//        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+//        float screenWidthDp = displayMetrics.widthPixels / displayMetrics.density;
+//        int noOfColumns = (int) (screenWidthDp / columnWidthDp + 0.5); // +0.5 for correct rounding to int.
+//        return noOfColumns;
+//    }
+//}

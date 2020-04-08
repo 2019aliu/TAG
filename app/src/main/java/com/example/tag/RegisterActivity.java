@@ -135,8 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
         // inflate all components, get the text
         mNameEditText = findViewById(R.id.itemName);
         mDescriptionEditText = findViewById(R.id.itemDescription);
-        mWifiSwitch = (Switch) findViewById(R.id.wifi_switch);
-        mBTSwitch = (Switch) findViewById(R.id.bt_switch);
 
 //        // Get the default bluetoothAdapter to store bonded devices into a Set of BluetoothDevice(s)
 //        final BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

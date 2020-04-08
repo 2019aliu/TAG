@@ -33,8 +33,6 @@ public class CloseRangeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mFlashButton = (ImageButton) findViewById(R.id.flashlight);
-        mVibrateButton = (ImageButton) findViewById(R.id.vibration);
 
         mFlashButton.setOnClickListener(new View.OnClickListener() {
             @Override

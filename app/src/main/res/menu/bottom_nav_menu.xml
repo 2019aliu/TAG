@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/navigation_home"
+        tools:icon="@drawable/ic_home_grey_24dp"
+        tools:srcCompat="@drawable/ic_home_grey_24dp"
+        android:title="@string/app_name" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        tools:icon="@drawable/ic_location_grey_24dp"
+        tools:srcCompat="@drawable/ic_location_grey_24dp"
+        android:title="@string/title_activity_gpsfind" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        tools:icon="@drawable/ic_settings_grey_24dp"
+        tools:srcCompat="@drawable/ic_settings_grey_24dp"
+        android:title="@string/title_activity_settings" />
+
+</menu>

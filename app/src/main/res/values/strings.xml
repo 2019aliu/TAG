@@ -86,4 +86,8 @@
     <string name="closerange_cold">Start walking around</string>
     <string name="closerange_medium">Getting closer…</string>
     <string name="closerange_hot">Very close!</string>
+    <string name="title_activity_bottom_nav">bottomNav</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
