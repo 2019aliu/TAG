@@ -50,7 +50,7 @@
     <!--    </string>-->
     <!--    <string name="attachment_summary_off">Only download attachments when manually requested</string>-->
 
-    <string name="btwifi_title">Please enable Bluetooth and/or Wifi to locate your device (turn on both for best results)</string>
+    <string name="btwifi_title">Please enable Bluetooth and/or Wifi to locate your device \n*turn on both for best results</string>
     <string name="btwifi_settings">Bluetooth/Wifi Settings</string>
     <string name="btwifi_checked">Locate Device</string>
     <string name="title_activity_login">Sign in</string>
@@ -81,9 +81,13 @@
     <string name="found_dialog_message">Please confirm that you\'ve found your device</string>
     <string name="found_ok">Confirm</string>
     <string name="found_cancel">Cancel</string>
-<!--    <string name="found_missing">Help</string>-->
+    <!--    <string name="found_missing">Help</string>-->
 
     <string name="closerange_cold">Start walking around</string>
     <string name="closerange_medium">Getting closer…</string>
     <string name="closerange_hot">Very close!</string>
+    <string name="title_activity_bottom_nav">bottomNav</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E2E2E2"
+    tools:context=".EditItem">
+
+    <include
+        android:id="@id/toolbar"
+        layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/nameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="301dp"
+        android:layout_marginEnd="344dp"
+        android:text="@string/nameLabel"
+        android:textColor="#F8070707"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/itemName"
+        android:layout_width="360dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="24dp"
+        android:autofillHints="The name of this item"
+        android:backgroundTint="#000000"
+        android:ems="10"
+        android:hint="@string/item_name_hint"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:textColorHint="#9F141414"
+        app:layout_constraintBottom_toTopOf="@+id/descriptionLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
+
+    <TextView
+        android:id="@+id/descriptionLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="307dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/descriptionLabel"
+        android:textColor="#050505"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/itemDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
+
+    <EditText
+        android:id="@+id/itemDescription"
+        android:layout_width="359dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints="A description of this item"
+        android:backgroundTint="#090808"
+        android:ems="10"
+        android:hint="@string/item_desc_hint"
+        android:inputType="textLongMessage"
+        android:textColorHint="#9F141414"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
+
+    <ImageView
+        android:id="@+id/newitemimage"
+        android:layout_width="228dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginBottom="58dp"
+        android:contentDescription="@string/item_desc_hint"
+        app:layout_constraintBottom_toTopOf="@+id/itemName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:srcCompat="@drawable/circles_background" />
+
+    <Button
+        android:id="@+id/updateButton"
+        android:layout_width="168dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="122dp"
+        android:backgroundTint="#F5302E2E"
+        android:foregroundTint="#000C0B0B"
+        android:text="@string/button_edit"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="682dp"
+        android:background="#F5302E2E"
+        app:itemIconTint="@color/colorAccent"
+        app:itemTextColor="#E2E2E2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <ImageButton
+        android:id="@+id/removeButton"
+        android:layout_width="64dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="347dp"
+        android:layout_marginTop="118dp"
+        android:layout_marginBottom="12dp"
+        android:background="#E2E2E2"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescription"
+        tools:src="@mipmap/removeitem_foreground" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,9 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.flash" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +35,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login">
+        </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".BTWifiActivity" />
         <activity
@@ -62,12 +66,35 @@
             android:name=".GPSFindActivity"
             android:label="@string/title_activity_gpsfind" />
         <activity android:name=".MainActivity">
+        </activity>
+
+        <activity
+            android:name=".EditActivity"
+            android:label="EditActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".EditItemListActivity"
+            android:label="EditItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".bottomNav"
+            android:label="@string/title_activity_bottom_nav" />
+        <activity android:name=".MyItemActivity" />
+
+        <activity
+            android:name=".LoggedOutActivity"
+            android:label="LoggedOutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".loginActivity"
+            android:label="loginActivity" />
     </application>
 
 </manifest>
