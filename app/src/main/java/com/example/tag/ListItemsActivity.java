@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
-public abstract class ListItemsActivity extends AppCompatActivity implements MyAdapter.ItemClickListener {
+public class ListItemsActivity extends AppCompatActivity implements MyAdapter.ItemClickListener {
     final String TAG = "ListItemsActivity";
     private RecyclerView mRecyclerView;
     //    private CardView mRecyclerView;
@@ -103,35 +103,35 @@ public abstract class ListItemsActivity extends AppCompatActivity implements MyA
         });
     }
 
-    // @Override
-    // public void onItemClick(View view, int position) throws ExecutionException, InterruptedException {
-        // MyItem itemSelected = mAdapter.getItem(position);
-        // Toast.makeText(this, "You clicked " + itemSelected.getName() + " on row number " + position, Toast.LENGTH_SHORT).show();
+     @Override
+     public void onItemClick(View view, int position) throws ExecutionException, InterruptedException {
+         MyItem itemSelected = mAdapter.getItem(position);
+         Toast.makeText(this, "You clicked " + itemSelected.getName() + " on row number " + position, Toast.LENGTH_SHORT).show();
 
-        // Create a Uri from an intent string. Use the result to create an Intent.
-        // double destLatitude = itemSelected.getLatitude();
-        // double destLongitude = itemSelected.getLongitude();
-        // System.out.println(String.format("Latitude: %s, Longitude: %s", destLatitude, destLongitude));
-        // String queryDestination = String.format("%s, %s", destLatitude, destLongitude);
-        // String queryDestination = String.format("9908 Mill Run Drive, Great Falls");
-        // Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s", queryDestination));
+         //Create a Uri from an intent string. Use the result to create an Intent.
+         double destLatitude = itemSelected.getLatitude();
+         double destLongitude = itemSelected.getLongitude();
+         System.out.println(String.format("Latitude: %s, Longitude: %s", destLatitude, destLongitude));
+         String queryDestination = String.format("%s, %s", destLatitude, destLongitude);
+         //String queryDestination = String.format("9908 Mill Run Drive, Great Falls");
+         Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s", queryDestination));
 
-        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-        // Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        // Make the Intent explicit by setting the Google Maps package
-        // mapIntent.setPackage("com.google.android.apps.maps");
+         //Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+         //Make the Intent explicit by setting the Google Maps package
+         mapIntent.setPackage("com.google.android.apps.maps");
 
-        // Attempt to start an activity that can handle the Intent
-        // if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            // Open up the next activity first
-            // Intent BTWifiIntent = new Intent(this, BTWifiActivity.class);
-            // startActivity(BTWifiIntent);
-            // And then open up Google Maps
-            // startActivity(mapIntent);
+         //Attempt to start an activity that can handle the Intent
+         if (mapIntent.resolveActivity(getPackageManager()) != null) {
+             //Open up the next activity first
+             Intent BTWifiIntent = new Intent(this, BTWifiActivity.class);
+             startActivity(BTWifiIntent);
+             //And then open up Google Maps
+             startActivity(mapIntent);
         }
 
-    // }
-// }
+     }
+ }
 
 //class Utility {
 //    public static int calculateNoOfColumns(Context context, float columnWidthDp) { // For example columnWidthdp=180

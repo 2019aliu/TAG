@@ -26,7 +26,7 @@ public class loginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(loginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                Intent findIntent = new Intent(loginActivity.this, ListItemsActivity.class);
+                Intent findIntent = new Intent(loginActivity.this, loginActivity.class);
                 startActivity(findIntent);
             }
         });
