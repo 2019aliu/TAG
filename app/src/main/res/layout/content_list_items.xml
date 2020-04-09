@@ -14,6 +14,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
+<<<<<<< Updated upstream
         android:layout_height="wrap_content"/>
+=======
+        android:layout_height="wrap_content" />
+
+
+>>>>>>> Stashed changes
 
 </RelativeLayout>

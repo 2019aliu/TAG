@@ -60,6 +60,7 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
         mRecyclerView.addItemDecoration(dividerItemDecoration);
 
 
+<<<<<<< Updated upstream
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +70,8 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
 //                        .setAction("Action", null).show();
             }
         });
+=======
+>>>>>>> Stashed changes
     }
 
     @Override

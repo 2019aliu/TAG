@@ -42,7 +42,7 @@ public class EditActivity  extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Toolbar toolbar = findViewById(R.id.registerToolbar);
-        toolbar.setTitle("Register an Item");
+        toolbar.setTitle("Edit an Item");
         setSupportActionBar(toolbar);
 
         // inflate all components, get the text
@@ -81,6 +81,7 @@ public class EditActivity  extends AppCompatActivity  {
         });
 
 
+        /*
         // Submit button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,13 +89,22 @@ public class EditActivity  extends AppCompatActivity  {
             public void onClick(View view) {
                 String name = mNameEditText.getText().toString();
                 String description = mDescriptionEditText.getText().toString();
+<<<<<<< Updated upstream
                 MyItem newItem = new MyItem(name, description, "00:99:C4:D1:CA:25", "00:b0:94:86:4e:6c");
                 mUserItems.child(name).push().setValue(newItem);
                 Log.d(TAG, "You registered an item with name "
+=======
+                MyItem newItem = new MyItem(name, description, btAddress, wifiMAC, deviceName);
+
+                mUserItems.child(deviceName).updateChildren(newItem.toMap());
+                Log.d(TAG, "You edited an item with name "
+>>>>>>> Stashed changes
                         + name + " and description " + description);
 
             }
         });
+        */
+
     }
 
 }
