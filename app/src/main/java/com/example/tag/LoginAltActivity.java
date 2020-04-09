@@ -19,15 +19,15 @@ public class LoginAltActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_alt);
 
-        // inflate the elements
-        mSignin = (Button) findViewById(R.id.signin);
-
-        mSignin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mainIntent = new Intent(LoginAltActivity.this, ListItemsActivity.class);
-                startActivity(mainIntent);
-            }
-        });
+//        // inflate the elements
+//        mSignin = (Button) findViewById(R.id.signin);
+//
+//        mSignin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent mainIntent = new Intent(LoginAltActivity.this, ListItemsActivity.class);
+//                startActivity(mainIntent);
+//            }
+//        });
     }
 }

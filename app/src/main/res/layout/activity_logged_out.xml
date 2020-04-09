@@ -10,7 +10,7 @@
     tools:context=".LoggedOutActivity">
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/signup"
         android:layout_width="415dp"
         android:layout_height="75dp"
         android:layout_marginStart="24dp"
@@ -31,7 +31,7 @@
         android:layout_marginTop="151dp"
         android:layout_marginEnd="9dp"
         android:layout_marginBottom="121dp"
-        app:layout_constraintBottom_toTopOf="@+id/login"
+        app:layout_constraintBottom_toTopOf="@+id/signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
