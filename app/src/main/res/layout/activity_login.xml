@@ -76,24 +76,8 @@
         android:enabled="false"
         android:text="@string/action_sign_in"
         android:textColor="#E2E2E2"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="5dp"
-        android:background="#F5302E2E"
-        app:itemIconTint="@color/colorAccent"
-        app:itemTextColor="#E2E2E2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup"
-        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,6 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login"></activity>
-        <activity android:name=".LoginAltActivity" />
         <activity
             android:name=".CloseRangeActivity"
             android:label="@string/title_activity_close_range"
@@ -48,6 +47,11 @@
             android:name=".ListItemsActivity"
             android:label="@string/title_activity_list_items"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -76,18 +80,11 @@
         <!-- android:name=".EditItemListActivity" -->
         <!-- android:label="EditItemListActivity" -->
         <!-- android:theme="@style/AppTheme.NoActionBar" /> -->
-        <activity
-            android:name=".bottomNav"
-            android:label="@string/title_activity_bottom_nav" />
         <activity android:name=".MyItemActivity" />
         <activity
             android:name=".LoggedOutActivity"
             android:label="LoggedOutActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

@@ -21,6 +21,21 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+    <ImageView
+        android:id="@+id/newitemimage"
+        android:layout_width="228dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginBottom="58dp"
+        android:contentDescription="@string/item_desc_hint"
+        app:layout_constraintBottom_toTopOf="@+id/itemName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:src="@drawable/circles_background" />
+
     <TextView
         android:id="@+id/nameLabel"
         android:layout_width="wrap_content"
@@ -88,23 +103,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
-
-    <ImageView
-        android:id="@+id/newitemimage"
-        android:layout_width="228dp"
-        android:layout_height="175dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginEnd="74dp"
-        android:layout_marginBottom="58dp"
-        android:contentDescription="@string/item_desc_hint"
-        app:layout_constraintBottom_toTopOf="@+id/itemName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:srcCompat="@drawable/circles_background" />
 
     <Button
         android:id="@+id/registerButton"
