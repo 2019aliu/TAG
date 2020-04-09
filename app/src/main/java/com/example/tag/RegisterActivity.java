@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -22,6 +23,7 @@ import android.net.wifi.p2p.WifiP2pDeviceList;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
@@ -117,18 +119,29 @@ public class RegisterActivity extends AppCompatActivity {
         // inflate all components, get the text
         mNameEditText = findViewById(R.id.itemName);
         mDescriptionEditText = findViewById(R.id.itemDescription);
-
-        // Initialize all buttons
         registerButton = (Button) findViewById(R.id.registerButton);
 
-        // Set listeners to open new intents in Android
-        // Find
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
-                Intent findIntent = new Intent(RegisterActivity.this, ListItemsActivity.class);
-                startActivity(findIntent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent homeIntent = new Intent(RegisterActivity.this, ListItemsActivity.class);
+                        startActivity(homeIntent);
+                    case R.id.navigation_dashboard:
+                        break;
+                    case R.id.navigation_notifications:
+                        String queryDestination = "1600 Pennsylvania Ave NW, Washington, DC 20500";
+                        Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s", queryDestination));
+
+                        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                        // Make the Intent explicit by setting the Google Maps package
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        break;
+                }
+                return false;
             }
         });
 
@@ -151,12 +164,10 @@ public class RegisterActivity extends AppCompatActivity {
         manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         channel = manager.initialize(this, getMainLooper(), null);
 
-
-        // Submit button
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        // Set listeners to open new intents in Android
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 String btAddress = "00:99:C4:D1:CA:25";
                 String wifiMAC = "00:b0:94:86:4e:6c";
                 String deviceName = "HTC One X";
@@ -216,6 +227,9 @@ public class RegisterActivity extends AppCompatActivity {
 //                }
 //                Log.d(TAG, "SSID of the current WIFI network: " + ssid);
 
+                Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                Intent findIntent = new Intent(RegisterActivity.this, ListItemsActivity.class);
+                startActivity(findIntent);
             }
         });
     }

@@ -9,28 +9,38 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="bottom"
         android:theme="@style/AppTheme.AppBarOverlay">
+
+        <include layout="@layout/toolbar"
+            android:id="@+id/list_item_toolbar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_list_items" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#F5302E2E"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_margin="@dimen/fab_margin"-->
+<!--        android:tint="@color/offwhite"-->
+<!--        app:backgroundTint="#F5302E2E"-->
+<!--        app:srcCompat="@android:drawable/ic_input_add" />-->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:tint="@color/offwhite"
-        app:backgroundTint="#F5302E2E"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="#F5302E2E"
+        android:id="@+id/navigation"
+        app:itemIconTint="@color/colorAccent"
+        app:itemTextColor="#E2E2E2"
+        app:menu="@menu/bottom_nav_menu"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="659dp" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

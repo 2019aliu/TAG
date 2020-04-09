@@ -9,7 +9,6 @@
     tools:context=".RegisterActivity"
     tools:showIn="@layout/activity_register">
 
-
     <!--    <TextView-->
     <!--        android:id="@+id/title_register"-->
     <!--        android:layout_width="wrap_content"-->
@@ -46,7 +45,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="24dp"
-        android:autofillHints="The name of this item"
         android:backgroundTint="#000000"
         android:ems="10"
         android:hint="@string/item_name_hint"
@@ -81,7 +79,6 @@
         android:layout_marginStart="27dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="20dp"
-        android:autofillHints="A description of this item"
         android:backgroundTint="#090808"
         android:ems="10"
         android:hint="@string/item_desc_hint"

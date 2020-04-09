@@ -7,38 +7,24 @@
     tools:context=".RegisterActivity">
 
     <include
-        android:id="@id/toolbar"
+        android:id="@+id/registerToolbar"
         layout="@layout/toolbar"/>
+
+    <include
+        android:id="@+id/register"
+        layout="@layout/content_register"
+        android:background="#5C5A5A" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#F5302E2E"
+        android:id="@+id/navigation"
         app:itemIconTint="@color/colorAccent"
         app:itemTextColor="#E2E2E2"
         app:menu="@menu/bottom_nav_menu"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="659dp" />
-
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/registerToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#F5302E2E"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include
-        android:id="@+id/register"
-        layout="@layout/content_register"
-        android:background="#5C5A5A" />
 
 </RelativeLayout>

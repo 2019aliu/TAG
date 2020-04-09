@@ -14,17 +14,20 @@
     <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rvItems"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#F5302E2E"
-        app:itemIconTint="@color/colorAccent"
-        app:itemTextColor="#E2E2E2"
-        app:menu="@menu/bottom_nav_menu"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="659dp" />
+    </androidx.recyclerview.widget.RecyclerView>
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|end"-->
+<!--        android:layout_marginTop="@dimen/fab_margin"-->
+<!--        android:layout_marginEnd="@dimen/fab_margin"-->
+<!--        android:layout_marginBottom="@dimen/fab_margin"-->
+<!--        android:tint="@color/offwhite"-->
+<!--        app:backgroundTint="#F5302E2E"-->
+<!--        app:srcCompat="@android:drawable/ic_input_add" />-->
 
 </RelativeLayout>
