@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 
-public class EditActivity  extends AppCompatActivity  {
+public class EditActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     private EditText mNameEditText;
     private EditText mDescriptionEditText;
