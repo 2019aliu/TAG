@@ -45,7 +45,48 @@ public class EditActivity extends AppCompatActivity {
         toolbar.setTitle("Edit an Item");
         setSupportActionBar(toolbar);
 
+<<<<<<< Updated upstream
         // inflate all components, get the text
+=======
+        Bundle extras = getIntent().getExtras();
+        String item = extras.getString("name");
+
+        // Initialize all buttons
+        editButton = (Button) findViewById(R.id.updateButton);
+        removeButton = (ImageButton) findViewById(R.id.removeButton);
+
+        EditText itemName = (EditText) findViewById(R.id.itemName);
+        EditText itemDescription = (EditText) findViewById(R.id.itemDescription);
+
+
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myref = mDatabase.getReference("test");
+
+
+        // Set listeners to open new intents in Android
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myref.child("testUser/" + item + "/name").setValue(itemName.getText().toString());
+                myref.child("testUser/" + item + "/description").setValue(itemDescription.getText().toString());
+                Toast.makeText(EditActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                Intent findIntent = new Intent(EditActivity.this, ListItemsActivity.class);
+                startActivity(findIntent);
+            }
+        });
+    }
+
+
+    /*
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edititem);
+
+        // Initialize all components
+        editButton = (Button) findViewById(R.id.updateButton);
+        removeButton = (ImageButton) findViewById(R.id.removeButton);
+>>>>>>> Stashed changes
         mNameEditText = findViewById(R.id.itemName);
         mDescriptionEditText = findViewById(R.id.itemDescription);
         mWifiSwitch = (Switch) findViewById(R.id.wifi_switch);
@@ -106,5 +147,7 @@ public class EditActivity extends AppCompatActivity {
         */
 
     }
+
+     */
 
 }
