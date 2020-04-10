@@ -25,7 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tag.ListItemsActivity;
+import com.example.tag.LoggedOutActivity;
 import com.example.tag.R;
+import com.example.tag.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -46,9 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                 Intent mainIntent = new Intent(LoginActivity.this, ListItemsActivity.class);
                 startActivity(mainIntent);
-                Log.d(TAG, "sign up");
             }
         });
 
@@ -88,8 +90,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
-                finish();
+//                //Complete and destroy login activity once successful
+//                finish();
+
+
+
             }
         });
 
@@ -127,6 +132,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent mainIntent = new Intent(LoginActivity.this, ListItemsActivity.class);
+                startActivity(mainIntent);
 //                loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());

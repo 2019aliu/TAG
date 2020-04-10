@@ -54,7 +54,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Log in or Sign up</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome! "</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -79,4 +79,5 @@
 
     <string name="listItemsFinish_title">Finish Maps</string>
     <string name="listItemsFinish_message">Please confirm that you\'ve finished directions with Maps</string>
+    <string name="title_activity_login2">Sign in</string>
 </resources>

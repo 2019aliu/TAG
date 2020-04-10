@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#E2E2E2"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -17,7 +18,7 @@
         android:id="@+id/tvItem"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground"
+        android:background="#007E3D3D"
         android:clickable="true"
         android:focusable="true"
         android:textSize="20sp" />
