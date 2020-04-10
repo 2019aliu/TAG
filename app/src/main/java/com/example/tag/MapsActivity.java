@@ -38,11 +38,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     case R.id.navigation_home:
                         Intent homeIntent = new Intent(MapsActivity.this, ListItemsActivity.class);
                         startActivity(homeIntent);
+                        break;
                     case R.id.navigation_add:
                         Intent addIntent = new Intent(MapsActivity.this, RegisterActivity.class);
                         startActivity(addIntent);
                         break;
                     case R.id.navigation_map:
+                        Intent mapIntent = new Intent(MapsActivity.this, MapsActivity.class);
+                        startActivity(mapIntent);
                         break;
                 }
                 return false;

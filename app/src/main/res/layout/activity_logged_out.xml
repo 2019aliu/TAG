@@ -9,32 +9,26 @@
     android:foregroundTint="#00F5F5F5"
     tools:context=".LoggedOutActivity">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="393dp"
+        android:layout_height="384dp"
+        android:layout_marginTop="153dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/itemtaglogo_foreground" />
+
     <Button
         android:id="@+id/signup"
-        android:layout_width="420dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="55dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
         android:backgroundTint="#F5302E2E"
         android:foregroundTint="#85111010"
         android:text="@string/action_sign_in_short"
         android:textColor="#FFFCFC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="393dp"
-        android:layout_height="384dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="153dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/itemtaglogo_foreground" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.tag;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -9,11 +10,13 @@ import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 public class BTWifiActivity extends AppCompatActivity {
@@ -69,6 +72,26 @@ public class BTWifiActivity extends AppCompatActivity {
                     Snackbar.make(v, "Please turn on bluetooth or Wifi, or both", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
+            }
+        });
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent homeIntent = new Intent(BTWifiActivity.this, ListItemsActivity.class);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.navigation_add:
+                        Intent addIntent = new Intent(BTWifiActivity.this, RegisterActivity.class);
+                        startActivity(addIntent);
+                        break;
+                    case R.id.navigation_map:
+                        break;
+                }
+                return false;
             }
         });
     }

@@ -12,6 +12,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.util.Log;
 import android.view.View;
@@ -72,6 +74,28 @@ public class EditActivity  extends AppCompatActivity  {
         final DatabaseReference mUserItems = mDatabase.child("testUser");
 
         HashMap<String, String> deviceIds = new HashMap<>();
+        // Read from the database
+        mUserItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                HashMap<String, HashMap<String, Object>> items =
+                        (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+                Log.d(TAG, "Shit works somewhat");
+                Log.d(TAG, "Items are: " + items);
+                // Populate the arraylist with PENDING items
+                for (String itemID: items.keySet()) {
+                    deviceIds.put((String) items.get(itemID).get("device"), itemID);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         // Set listeners to open new intents in Android
         // Submit button
@@ -87,32 +111,37 @@ public class EditActivity  extends AppCompatActivity  {
 
                 // Find the device ID with the given device
 
-                mUserItems.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        HashMap<String, HashMap<String, Object>> items =
-                                (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
-                        Log.d(TAG, "Shit works somewhat");
-                        Log.d(TAG, "Items are: " + items);
-                        // Populate the arraylist with PENDING items
-                        for (String itemID: items.keySet()) {
-                            if (! ((Boolean) items.get(itemID).get("pending")) ) {
-                                deviceIds.put((String) items.get(itemID).get("device"), itemID);
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                });
+//                mUserItems.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        // This method is called once with the initial value and again
+//                        // whenever data at this location is updated.
+//                        HashMap<String, HashMap<String, Object>> items =
+//                                (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+//                        Log.d(TAG, "Shit works somewhat");
+//                        Log.d(TAG, "Items are: " + items);
+//                        // Populate the arraylist with PENDING items
+//                        for (String itemID: items.keySet()) {
+//                            if (! ((Boolean) items.get(itemID).get("pending")) ) {
+//                                deviceIds.put((String) items.get(itemID).get("device"), itemID);
+//                            }
+//                        }
+//                    }
+//                    @Override
+//                    public void onCancelled(DatabaseError error) {
+//                        // Failed to read value
+//                        Log.w(TAG, "Failed to read value.", error.toException());
+//                    }
+//                });
 
                 Log.d(TAG, "Devices are: " + deviceIds);
 
-                mUserItems.child(deviceIds.get(device)).updateChildren(changes);
+                for (String nextDevice: deviceIds.keySet()) {
+                    if (nextDevice.equals(device)) {
+                        Log.d(TAG, deviceIds.get(device));
+                        mUserItems.child(deviceIds.get(device)).updateChildren(changes);
+                    }
+                }
                 Toast.makeText(EditActivity.this, "Updated", Toast.LENGTH_SHORT).show();
                 Intent findIntent = new Intent(EditActivity.this, ListItemsActivity.class);
                 startActivity(findIntent);

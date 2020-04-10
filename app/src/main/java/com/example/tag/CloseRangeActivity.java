@@ -16,9 +16,11 @@ import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +29,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -73,6 +76,29 @@ public class CloseRangeActivity extends AppCompatActivity {
         taglightButton = (ImageButton) findViewById(R.id.taglightButton);
         tagvibrateButton = (ImageButton) findViewById(R.id.tagvibrateButton);
         mFoundButton = (Button) findViewById(R.id.founditem);
+
+        // Bottom Navigation Bar
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        Intent homeIntent = new Intent(CloseRangeActivity.this, ListItemsActivity.class);
+                        startActivity(homeIntent);
+                        break;
+                    case R.id.navigation_add:
+                        Intent addIntent = new Intent(CloseRangeActivity.this, RegisterActivity.class);
+                        startActivity(addIntent);
+                        break;
+                    case R.id.navigation_map:
+                        Intent mapIntent = new Intent(CloseRangeActivity.this, MapsActivity.class);
+                        startActivity(mapIntent);
+                        break;
+                }
+                return false;
+            }
+        });
 
 
         // Set listeners to open new intents in Android
