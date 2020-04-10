@@ -12,6 +12,11 @@
     <string name="finishGPSText">Done</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!--  Bottom Nav Menu  -->
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_add">Add</string>
+    <string name="bottom_nav_map">Map</string>
+
     <!--  Register an item  -->
     <string name="item_name_hint">The name of your item</string>
     <string name="item_desc_hint">A short description of what your item looks like</string>
@@ -34,18 +39,6 @@
     <string name="camera_title">Camera AR</string>
     <string name="camera_summary_on">Enabled</string>
     <string name="camera_summary_off">Disabled</string>
-
-    <!--    &lt;!&ndash; Messages Preferences &ndash;&gt;-->
-    <!--    <string name="signature_title">Your signature</string>-->
-    <!--    <string name="reply_title">Default reply action</string>-->
-
-    <!--    &lt;!&ndash; Sync Preferences &ndash;&gt;-->
-    <!--    <string name="sync_title">Sync email periodically</string>-->
-    <!--    <string name="attachment_title">Download incoming attachments</string>-->
-    <!--    <string name="attachment_summary_on">Automatically download attachments for incoming emails-->
-    <!--    </string>-->
-    <!--    <string name="attachment_summary_off">Only download attachments when manually requested</string>-->
-
     <string name="btwifi_title">Please enable Bluetooth and/or Wifi to locate your device\n\n*Turn on both for best results</string>
     <string name="btwifi_settings">Bluetooth/Wifi Settings</string>
     <string name="btwifi_checked">Locate Device</string>
@@ -64,7 +57,6 @@
     <string name="found_dialog_message">Please confirm that you\'ve found your device</string>
     <string name="found_ok">Confirm</string>
     <string name="found_cancel">Cancel</string>
-    <!--    <string name="found_missing">Help</string>-->
 
     <string name="closerange_cold">Start walking around</string>
     <string name="closerange_medium">Getting closer…</string>
@@ -75,9 +67,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="confirmString">Confirm</string>
     <string name="cancelString">Cancel</string>
-    <!--    <string name="found_missing">Help</string>-->
 
     <string name="listItemsFinish_title">Finish Maps</string>
     <string name="listItemsFinish_message">Please confirm that you\'ve finished directions with Maps</string>
     <string name="title_activity_login2">Sign in</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

@@ -5,16 +5,16 @@
     <item
         android:id="@+id/navigation_home"
         tools:icon="@drawable/ic_home_grey_24dp"
-        android:title="@string/app_name" />
+        android:title="@string/bottom_nav_home" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_add"
+        tools:icon="@drawable/ic_add_grey_24dp"
+        android:title="@string/bottom_nav_add" />
+
+    <item
+        android:id="@+id/navigation_map"
         tools:icon="@drawable/ic_location_grey_24dp"
-        android:title="@string/title_activity_gpsfind" />
-
-    <item
-        android:id="@+id/navigation_notifications"
-        tools:icon="@drawable/ic_settings_grey_24dp"
-        android:title="@string/title_activity_settings" />
+        android:title="@string/bottom_nav_map" />
 
 </menu>

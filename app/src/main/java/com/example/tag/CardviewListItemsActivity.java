@@ -52,8 +52,8 @@ public class CardviewListItemsActivity extends AppCompatActivity implements MyAd
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                HashMap<String, HashMap<String, String>> items =
-                        (HashMap<String, HashMap<String, String>>) dataSnapshot.getValue();
+                HashMap<String, HashMap<String, Object>> items =
+                        (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
                 // Populate the arraylist with a bunch of items
                 for (String itemName: items.keySet()) {
                     MyItem item = new MyItem(items.get(itemName));

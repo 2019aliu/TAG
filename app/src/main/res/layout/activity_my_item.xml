@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E2E2E2"
-    tools:context=".EditItem">
+    tools:context=".MyItemActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -33,7 +33,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
         android:background="#F5302E2E"
         app:itemIconTint="@color/colorAccent"
         app:itemTextColor="#E2E2E2"

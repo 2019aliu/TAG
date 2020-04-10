@@ -21,16 +21,16 @@ public class MyItem {
         this.device = device;
     }
 
-    public MyItem(HashMap<String, String> data) {
+    public MyItem(HashMap<String, Object> data) {
         if (data == null) {
             throw new IllegalArgumentException("Provided mapping for MyItem is null");
         }
-        this.name = data.get("name");
-        this.description = data.get("description");
-        this.btAddress = data.get("btAddress");
-        this.wifiMAC = data.get("wifiMAC");
-        this.device = data.get("device");
-        String locationRaw = data.get("location");
+        this.name = (String) data.get("name");
+        this.description = (String) data.get("description");
+        this.btAddress = (String) data.get("btAddress");
+        this.wifiMAC = (String) data.get("wifiMAC");
+        this.device = (String) data.get("device");
+        String locationRaw = (String) data.get("location");
         String[] locationCoordsRaw = locationRaw.replaceAll("[^0-9\\.\\- ]", "").toLowerCase().split("\\s+");
         location[0] = Double.parseDouble(locationCoordsRaw[0]);
         location[1] = Double.parseDouble(locationCoordsRaw[1]);

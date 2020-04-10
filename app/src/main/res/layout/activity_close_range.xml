@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#F5302E2E"
+        android:id="@+id/navigation"
         app:itemIconTint="@color/colorAccent"
         app:itemTextColor="#E2E2E2"
         app:menu="@menu/bottom_nav_menu"

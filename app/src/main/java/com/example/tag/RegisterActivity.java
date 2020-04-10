@@ -8,6 +8,7 @@ import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
@@ -33,6 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -42,6 +44,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -57,56 +60,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-// implements WifiP2pManager.ChannelListener, DeviceListFragment.DeviceActionListener
 public class RegisterActivity extends AppCompatActivity {
     private static final String TAG = "RegisterActivity";
     private EditText mNameEditText;
     private EditText mDescriptionEditText;
-    private Switch mWifiSwitch;
-    private Switch mBTSwitch;
+    private Button registerButton;
 
     // Database objects
     private DatabaseReference mDatabase;
-
-    // Bluetooth Connection
-    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//    private BluetoothAdapter BTAdapter = BluetoothAdapter.getDefaultAdapter();
-
-    // Wifi P2P Connection
-    private final IntentFilter intentFilter = new IntentFilter();
-    private WifiP2pManager.Channel channel;
-    private WifiP2pManager manager;
-    private BroadcastReceiver receiver = null;
-    private boolean isWifiP2pEnabled = false;
-    private List<WifiP2pDevice> peers = new ArrayList<WifiP2pDevice>();
-//    private boolean retryChannel = false;
-//    private static final int PERMISSIONS_REQUEST_CODE_ACCESS_FINE_LOCATION = 1001;
-
-    /**
-     * @param isWifiP2pEnabled the isWifiP2pEnabled to set
-     */
-    public void setIsWifiP2pEnabled(boolean isWifiP2pEnabled) {
-        this.isWifiP2pEnabled = isWifiP2pEnabled;
-    }
-
-    private WifiP2pManager.PeerListListener peerListListener = new WifiP2pManager.PeerListListener() {
-        @Override
-        public void onPeersAvailable(WifiP2pDeviceList peerList) {
-
-            List<WifiP2pDevice> refreshedPeers = (ArrayList<WifiP2pDevice>) peerList.getDeviceList();
-            if (!refreshedPeers.equals(peers)) {
-                peers.clear();
-                peers.addAll(refreshedPeers);
-            }
-
-            if (peers.size() == 0) {
-                Log.d(TAG, "No devices found");
-                return;
-            }
-        }
-    };
-
-    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,16 +90,11 @@ public class RegisterActivity extends AppCompatActivity {
                     case R.id.navigation_home:
                         Intent homeIntent = new Intent(RegisterActivity.this, ListItemsActivity.class);
                         startActivity(homeIntent);
-                    case R.id.navigation_dashboard:
+                    case R.id.navigation_add:
                         break;
-                    case R.id.navigation_notifications:
-                        String queryDestination = "1600 Pennsylvania Ave NW, Washington, DC 20500";
-                        Uri gmmIntentUri = Uri.parse(String.format("google.navigation:q=%s", queryDestination));
-
-                        // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
-                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                        // Make the Intent explicit by setting the Google Maps package
-                        mapIntent.setPackage("com.google.android.apps.maps");
+                    case R.id.navigation_map:
+                        Intent mapIntent = new Intent(RegisterActivity.this, MapsActivity.class);
+                        startActivity(mapIntent);
                         break;
                 }
                 return false;
@@ -149,145 +105,85 @@ public class RegisterActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("test");
         final DatabaseReference mUserItems = mDatabase.child("testUser");
 
-        // Initialize wifi P2P connection
-        // Indicates a change in the Wi-Fi P2P status.
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
-
-        // Indicates a change in the list of available peers.
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-
-        // Indicates the state of Wi-Fi P2P connectivity has changed.
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-
-        // Indicates this device's details have changed.
-        intentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
-        manager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
-        channel = manager.initialize(this, getMainLooper(), null);
-
         // Set listeners to open new intents in Android
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String btAddress = "00:99:C4:D1:CA:25";
-                String wifiMAC = "00:b0:94:86:4e:6c";
-                String deviceName = "HTC One X";
+                // Structures to hold all of the device names
+                HashMap<String, String> deviceIds = new HashMap<>();
+                AlertDialog.Builder builderSingle = new AlertDialog.Builder(RegisterActivity.this);
+//                builderSingle.setIcon(R.drawable.circle);
+                builderSingle.setTitle("Select your device:");
+                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RegisterActivity.this, android.R.layout.select_dialog_singlechoice);
 
-                // Make a new item
-                String name = mNameEditText.getText().toString();
-                String description = mDescriptionEditText.getText().toString();
-                MyItem newItem = new MyItem(name, description, btAddress, wifiMAC, deviceName);
-
-                // Register it to the database
-                mUserItems.child(deviceName).updateChildren(newItem.toMap());
-
-                // Bluetooth Enabling
-                int REQUEST_ENABLE_BT = 1;
-                Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-
-                // Currently paired devices
-                Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-                if (pairedDevices.size() > 0) {
-                    for (BluetoothDevice device: pairedDevices) {
-                        Log.d(TAG, "Name:" + device.getName() + ", address:" + device.getAddress());
-                    }
-                }
-
-                manager.discoverPeers(channel, new WifiP2pManager.ActionListener() {
-
+                // Read from the database
+                mUserItems.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onSuccess() {
-                        // Code for when the discovery initiation is successful goes here.
-                        // No services have actually been discovered yet, so this method
-                        // can often be left blank. Code for peer discovery goes in the
-                        // onReceive method, detailed below.
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        HashMap<String, HashMap<String, Object>> items =
+                                (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+                        // Populate the arraylist with PENDING items
+                        for (String itemID: items.keySet()) {
+                            if ((Boolean) items.get(itemID).get("pending")) {
+                                arrayAdapter.add((String) items.get(itemID).get("device"));
+                                deviceIds.put((String) items.get(itemID).get("device"), itemID);
+                            }
+                        }
                     }
-
                     @Override
-                    public void onFailure(int reasonCode) {
-                        // Code for when the discovery initiation fails goes here.
-                        // Alert the user that something went wrong.
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
                     }
                 });
 
+                builderSingle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
-                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                WifiInfo wifiInfo;
-                String ssid = "";
-                wifiInfo = wifiManager.getConnectionInfo();
-                if (wifiInfo == null) {
-                    Log.d(TAG, "No network connected!");
-                } else {
-                    Log.d(TAG, "SSID of the current WiFi network: " + wifiInfo.getSSID());
-                }
+                builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strName = arrayAdapter.getItem(which);
+                        AlertDialog.Builder builderInner = new AlertDialog.Builder(RegisterActivity.this);
+                        builderInner.setMessage(strName);
+                        builderInner.setTitle("Your Selected Item is");
+                        builderInner.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,int which) {
+                                // Make the map with name and description
+                                HashMap<String, Object> changes = new HashMap<>();
+                                String name = mNameEditText.getText().toString();
+                                String description = mDescriptionEditText.getText().toString();
+                                changes.put("/name", name);
+                                changes.put("/description", description);
+                                changes.put("/pending", false);
 
-                Log.d(TAG, "SSID of your wifi is: " + getMacAddr());
-//                if (wifiInfo.getSupplicantState() == SupplicantState.COMPLETED) {
-//                    ssid = wifiInfo.getSSID();
-//                }
-//                Log.d(TAG, "SSID of the current WIFI network: " + ssid);
-
-                Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
-                Intent findIntent = new Intent(RegisterActivity.this, ListItemsActivity.class);
-                startActivity(findIntent);
+                                // "Register" the item to the database
+                                // By updating the name and description fields
+                                mUserItems.child(deviceIds.get(strName)).updateChildren(changes);
+                                dialog.dismiss();
+                                Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                                Intent findIntent = new Intent(RegisterActivity.this, ListItemsActivity.class);
+                                startActivity(findIntent);
+                            }
+                        });
+                        builderInner.setNegativeButton("Back", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builderInner.show();
+                    }
+                });
+                builderSingle.show();
             }
         });
     }
-
-    public static String getMacAddr() {
-        try {
-            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface nif : all) {
-                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
-
-                byte[] macBytes = nif.getHardwareAddress();
-                if (macBytes == null) {
-                    return "";
-                }
-
-                StringBuilder res1 = new StringBuilder();
-                for (byte b : macBytes) {
-                    String hex = Integer.toHexString(b & 0xFF);
-                    if (hex.length() == 1)
-                        hex = "0".concat(hex);
-                    res1.append(hex.concat(":"));
-                }
-
-                if (res1.length() > 0) {
-                    res1.deleteCharAt(res1.length() - 1);
-                }
-                return res1.toString();
-            }
-        } catch (Exception ex) {
-        }
-        return "";
-    }
-//
-//    /** register the BroadcastReceiver with the intent values to be matched */
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        receiver = new WiFiDirectBroadcastReceiver(manager, channel, this);
-//        registerReceiver(receiver, intentFilter);
-//    }
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        unregisterReceiver(receiver);
-//    }
-////
-////    @Override
-//    public void connect(WifiP2pConfig config) {
-//        manager.connect(channel, config, new WifiP2pManager.ActionListener() {
-//            @Override
-//            public void onSuccess() {
-//                // WiFiDirectBroadcastReceiver will notify us. Ignore for now.
-//            }
-//            @Override
-//            public void onFailure(int reason) {
-//                Toast.makeText(RegisterActivity.this, "Connect failed. Retry.",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
 }
