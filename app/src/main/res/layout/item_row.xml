@@ -12,11 +12,11 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:srcCompat="@drawable/circles_background" />
+        tools:srcCompat="@mipmap/items_foreground" />
 
     <TextView
         android:id="@+id/tvItem"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#007E3D3D"
         android:clickable="true"
