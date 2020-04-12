@@ -54,6 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:src="@drawable/ic_location_grey_24dp"
         tools:srcCompat="@drawable/ic_location_grey_24dp" />
 
     <ImageButton
@@ -69,5 +70,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:src="@drawable/ic_edit_black_24dp"
         tools:srcCompat="@drawable/ic_edit_black_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

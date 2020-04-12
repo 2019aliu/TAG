@@ -71,8 +71,8 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
 //                // use this setting to improve performance if you know that changes
 //                // in content do not change the layout size of the RecyclerView
 //                mRecyclerView.setHasFixedSize(true);
-                int spanCount = 3; // 3 columns
-                int spacing = 50; // 50px
+                int spanCount = 2; // 2 columns
+                int spacing = 80; // 80px
                 boolean includeEdge = true;
                 mRecyclerView.addItemDecoration(new SpacesItemDecoration(spanCount, spacing, includeEdge));
 
