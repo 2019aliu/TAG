@@ -16,6 +16,7 @@ public class MyItemActivity extends AppCompatActivity {
     private ImageButton editButton;
     private ImageButton findButton;
 
+    private String id;
     private String name;
     private String description;
     private String btAddress;
@@ -33,6 +34,7 @@ public class MyItemActivity extends AppCompatActivity {
         // which should be the listitemsActivity
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            id = extras.getString("id");
             name = extras.getString("name");
             description = extras.getString("description");
             btAddress = extras.getString("btAddress");
@@ -55,6 +57,7 @@ public class MyItemActivity extends AppCompatActivity {
                 Intent editIntent = new Intent(MyItemActivity.this,EditActivity.class);
                 editIntent.putExtra("name", name);
                 editIntent.putExtra("description", description);
+                editIntent.putExtra("id", id);
                 startActivity(editIntent);
             }
         });
