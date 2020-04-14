@@ -20,18 +20,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/circle" />
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="@string/closerange_cold"
+            android:background="@drawable/circle"
             android:textColor="#FFFCFC"
             android:textSize="24sp"
             android:visibility="visible" />
