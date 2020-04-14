@@ -62,7 +62,9 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
                 // Populate the arraylist with a bunch of items
                 for (String itemName: items.keySet()) {
                     if (! ((Boolean) items.get(itemName).get("pending")) ) {
+                        Log.d(TAG, itemName);
                         MyItem item = new MyItem(items.get(itemName));
+                        item.setId(itemName);
                         myDataset.add(item);
                     }
                 }
@@ -124,6 +126,7 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
         Intent myItemIntent = new Intent(ListItemsActivity.this, MyItemActivity.class);
 
         // put in all of the necessary properties of the item
+        myItemIntent.putExtra("id", itemSelected.getId());
         myItemIntent.putExtra("name", itemSelected.getName());
         myItemIntent.putExtra("description", itemSelected.getDescription());
         myItemIntent.putExtra("btAddress", itemSelected.getBtAddress());

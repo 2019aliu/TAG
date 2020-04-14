@@ -10,6 +10,7 @@ public class MyItem {
     private String btAddress;
     private String wifiMAC;
     private String device;
+    private String id;
     private double[] location = new double[2];
     private boolean isSelected = false;
 
@@ -118,5 +119,13 @@ public class MyItem {
 
     public boolean isSelected() {
         return isSelected;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
