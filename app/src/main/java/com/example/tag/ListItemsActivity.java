@@ -85,10 +85,10 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
                 mAdapter.setClickListener(ListItemsActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
 
-                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
-                        mRecyclerView.getContext(),
-                        mLayoutManager.getOrientation());
-                mRecyclerView.addItemDecoration(dividerItemDecoration);
+//                DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(
+//                        mRecyclerView.getContext(),
+//                        mLayoutManager.getOrientation());
+//                mRecyclerView.addItemDecoration(dividerItemDecoration);
             }
 
             @Override

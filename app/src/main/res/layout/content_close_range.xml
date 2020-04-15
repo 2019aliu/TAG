@@ -26,7 +26,6 @@
             android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="@string/closerange_cold"
-            android:background="@drawable/circle"
             android:textColor="#FFFCFC"
             android:textSize="24sp"
             android:visibility="visible" />
