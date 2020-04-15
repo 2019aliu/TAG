@@ -7,23 +7,6 @@
     android:background="#E2E2E2"
     tools:context=".MyItemActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="458dp"
-        android:layout_height="398dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="74dp"
-        android:layout_marginBottom="58dp"
-        android:contentDescription="@string/item_desc_hint"
-        app:layout_constraintBottom_toTopOf="@+id/itemName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@mipmap/items_foreground" />
-
     <include
         android:id="@id/toolbar"
         layout="@layout/toolbar" />
@@ -43,20 +26,15 @@
 
     <ImageButton
         android:id="@+id/mapButton"
-        android:layout_width="200dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="59dp"
-        android:layout_marginEnd="106dp"
-        android:layout_marginBottom="169dp"
+        android:layout_width="195dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="124dp"
         android:backgroundTint="#F5302E2E"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_map_grey"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/editButton"
@@ -78,13 +56,26 @@
         android:layout_width="92dp"
         android:layout_height="81dp"
         android:layout_marginStart="7dp"
-        android:layout_marginTop="87dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="49dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bottomNavigationView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:srcCompat="@mipmap/removeitem_foreground" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="375dp"
+        android:layout_height="381dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/mapButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.441"
+        app:srcCompat="@mipmap/items_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,6 @@
         android:id="@+id/itemName"
         android:layout_width="360dp"
         android:layout_height="52dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -76,14 +75,18 @@
 
     <ImageView
         android:id="@+id/newitemimage"
-        android:layout_width="228dp"
-        android:layout_height="175dp"
+        android:layout_width="315dp"
+        android:layout_height="310dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="100dp"
         android:contentDescription="@string/item_desc_hint"
-        app:layout_constraintBottom_toTopOf="@+id/itemName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/circles_background" />
+        app:layout_constraintBottom_toTopOf="@+id/descriptionLabel"
+        app:layout_constraintEnd_toStartOf="@+id/toolbar"
+        app:layout_constraintHorizontal_bias="0.076"
+        app:layout_constraintStart_toEndOf="@+id/nameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.579"
+        app:srcCompat="@mipmap/itemsicon_foreground" />
 
     <Button
         android:id="@+id/updateButton"
@@ -100,8 +103,8 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="452dp"
+        android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:background="#F5302E2E"
         app:itemIconTint="@color/colorAccent"
