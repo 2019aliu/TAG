@@ -8,11 +8,11 @@
     tools:context=".MyItemActivity">
 
     <include
-        android:id="@id/toolbar"
+        android:id="@+id/myitem_toolbar"
         layout="@layout/toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/myitem_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -28,13 +28,13 @@
         android:id="@+id/mapButton"
         android:layout_width="195dp"
         android:layout_height="73dp"
-        android:layout_marginStart="108dp"
+        android:layout_marginEnd="108dp"
         android:layout_marginBottom="124dp"
         android:backgroundTint="#F5302E2E"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_map_grey"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/myitem_navigation"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageButton
         android:id="@+id/editButton"
@@ -44,16 +44,15 @@
         android:layout_marginEnd="8dp"
         android:backgroundTint="#F5302E2E"
         android:src="@drawable/ic_edit_grey"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/myitem_toolbar" />
 
     <ImageView
         android:id="@+id/removeImage"
         android:layout_width="92dp"
         android:layout_height="81dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@id/myitem_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@mipmap/removeitem_foreground" />
 
@@ -61,15 +60,10 @@
         android:id="@+id/imageView4"
         android:layout_width="375dp"
         android:layout_height="381dp"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/mapButton"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.441"
+        app:layout_constraintTop_toBottomOf="@+id/editButton"
         app:srcCompat="@mipmap/items_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

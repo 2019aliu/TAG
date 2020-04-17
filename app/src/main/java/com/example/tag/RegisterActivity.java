@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Toolbar toolbar = findViewById(R.id.registerToolbar);
-        toolbar.setTitle("Register an Item");
+        toolbar.setTitle("T∆G");
         setSupportActionBar(toolbar);
 
         // inflate all components, get the text

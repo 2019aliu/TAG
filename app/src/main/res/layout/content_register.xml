@@ -23,18 +23,14 @@
 
     <ImageView
         android:id="@+id/newitemimage"
-        android:layout_width="228dp"
-        android:layout_height="175dp"
+        android:layout_width="432dp"
+        android:layout_height="326dp"
         android:layout_marginTop="39dp"
-        android:layout_marginBottom="58dp"
         android:contentDescription="@string/item_desc_hint"
-        app:layout_constraintBottom_toTopOf="@+id/itemName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:src="@drawable/circles_background" />
+        app:srcCompat="@mipmap/items_foreground" />
 
     <TextView
         android:id="@+id/nameLabel"
