@@ -46,20 +46,7 @@ public class BTWifiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 WifiManager mWifiManager = (WifiManager)
                         getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-//                if (mWifiManager.isWifiEnabled()) {
-//                    Toast.makeText(BTWifiActivity.this, "Wifi is enabled", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(BTWifiActivity.this, "Wifi is disabled", Toast.LENGTH_SHORT).show();
-//                }
                 BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-//                if (mBluetoothAdapter == null) {
-//                    Toast.makeText(BTWifiActivity.this, "Device does not support bluetooth", Toast.LENGTH_SHORT).show();
-//                } else if (mBluetoothAdapter.isEnabled()) {
-//                    Toast.makeText(BTWifiActivity.this, "Bluetooth is enabled", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(BTWifiActivity.this, "Bluetooth is not enabled", Toast.LENGTH_SHORT).show();
-//                }
-
                 if (!mWifiManager.isWifiEnabled() && mBluetoothAdapter == null) {
                     Snackbar.make(v, "Device does not support bluetooth. Please turn on Wifi", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
