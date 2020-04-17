@@ -52,10 +52,10 @@
             android:contentDescription="@string/closerange_cold"
             android:cropToPadding="false"
             android:scaleType="centerInside"
+            android:src="@mipmap/taglight_foreground"
             app:layout_constraintEnd_toStartOf="@+id/tagvibrateButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/powerCircle"
-            tools:srcCompat="@mipmap/taglight_foreground" />
+            app:layout_constraintTop_toBottomOf="@+id/powerCircle" />
 
         <ImageButton
             android:id="@+id/tagvibrateButton"
@@ -64,10 +64,10 @@
             android:background="#F2B1B1B1"
             android:contentDescription="@string/closerange_cold"
             android:scaleType="centerInside"
+            android:src="@mipmap/tagvibrate_foreground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/taglightButton"
-            app:layout_constraintTop_toBottomOf="@+id/powerCircle"
-            tools:srcCompat="@mipmap/tagvibrate_foreground" />
+            app:layout_constraintTop_toBottomOf="@+id/powerCircle" />
 
     </LinearLayout>
 
