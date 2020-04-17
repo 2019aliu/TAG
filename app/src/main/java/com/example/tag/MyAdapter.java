@@ -2,12 +2,12 @@ package com.example.tag;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.RippleDrawable;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -15,37 +15,10 @@ import java.util.concurrent.ExecutionException;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
+    private static final String TAG = "MyAdapter";
     private List<MyItem> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
-//    private final PublishSubject<String> onClickSubject = PublishSubject.create();
-    private static final String TAG = "debugging";
-
-    // stores and recycles views as they are scrolled off screen
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        View view;
-        TextView myTextView;
-
-        MyViewHolder(View itemView) {
-            super(itemView);
-            view = itemView;
-            myTextView = itemView.findViewById(R.id.tvItem);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (mClickListener != null) {
-                try {
-                    mClickListener.onItemClick(view, getAdapterPosition());
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     // data is passed into the constructor
     public MyAdapter(Context context, List<MyItem> data) {
@@ -87,5 +60,36 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
         void onItemClick(View view, int position) throws ExecutionException, InterruptedException;
+    }
+
+    // stores and recycles views as they are scrolled off screen
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        View view;
+        TextView myTextView;
+        ImageView myImageView;
+
+        MyViewHolder(View itemView) {
+            super(itemView);
+            view = itemView;
+            myTextView = itemView.findViewById(R.id.tvItem);
+            myImageView = itemView.findViewById(R.id.itemImage);
+            itemView.setOnClickListener(this);
+            myTextView.setOnClickListener(this);
+            myImageView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) {
+                try {
+                    mClickListener.onItemClick(view, getAdapterPosition());
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

@@ -1,15 +1,20 @@
 package com.example.tag;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MyItemActivity extends AppCompatActivity {
 
@@ -29,6 +34,9 @@ public class MyItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_item);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("T∆G");
+        setSupportActionBar(toolbar);
 
         // Get extras from the previous intent,
         // which should be the listitemsActivity
@@ -83,6 +91,26 @@ public class MyItemActivity extends AppCompatActivity {
                     // And then open up Google Maps
                     startActivity(mapIntent);
                 }
+            }
+        });
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        break;
+                    case R.id.navigation_add:
+                        Intent addIntent = new Intent(MyItemActivity.this, RegisterActivity.class);
+                        startActivity(addIntent);
+                        break;
+                    case R.id.navigation_map:
+                        Intent mapIntent = new Intent(MyItemActivity.this, MapsActivity.class);
+                        startActivity(mapIntent);
+                        break;
+                }
+                return false;
             }
         });
     }

@@ -72,4 +72,6 @@
     <string name="listItemsFinish_message">Please confirm that you\'ve finished directions with Maps</string>
     <string name="title_activity_login2">Sign in</string>
     <string name="title_activity_maps">Map</string>
+    <string name="error_missing_permissions">Please provide necessary permissions for this application</string>
+    <string name="status_connected">Device has been connected</string>
 </resources>
