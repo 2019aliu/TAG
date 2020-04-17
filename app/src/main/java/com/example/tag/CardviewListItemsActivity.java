@@ -38,7 +38,7 @@ public class CardviewListItemsActivity extends AppCompatActivity implements MyAd
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cardview_activity_list_items);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_login);
         toolbar.setTitle("Find an Item");
         setSupportActionBar(toolbar);
 
