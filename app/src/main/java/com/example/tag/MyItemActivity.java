@@ -1,15 +1,20 @@
 package com.example.tag;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MyItemActivity extends AppCompatActivity {
 
@@ -29,6 +34,10 @@ public class MyItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_item);
+        Toolbar toolbar = findViewById(R.id.list_item_toolbar);
+        toolbar.setTitle("T∆G");
+        setSupportActionBar(toolbar);
+        System.out.println(toolbar.getTitle());
 
         // Get extras from the previous intent,
         // which should be the listitemsActivity
@@ -61,6 +70,7 @@ public class MyItemActivity extends AppCompatActivity {
                 startActivity(editIntent);
             }
         });
+
 
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
