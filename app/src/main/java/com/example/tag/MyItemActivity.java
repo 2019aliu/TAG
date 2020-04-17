@@ -34,10 +34,6 @@ public class MyItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_item);
-        Toolbar toolbar = findViewById(R.id.list_item_toolbar);
-        toolbar.setTitle("T∆G");
-        setSupportActionBar(toolbar);
-        System.out.println(toolbar.getTitle());
 
         // Get extras from the previous intent,
         // which should be the listitemsActivity
