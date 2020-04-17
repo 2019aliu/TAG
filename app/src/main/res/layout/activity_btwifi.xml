@@ -11,7 +11,7 @@
     tools:context=".BTWifiActivity">
 
     <include
-        android:id="@id/toolbar_login"
+        android:id="@id/login_toolbar"
         layout="@layout/toolbar"/>
 
     <TextView

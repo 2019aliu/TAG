@@ -15,20 +15,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tag.ListItemsActivity;
-import com.example.tag.LoggedOutActivity;
 import com.example.tag.R;
-import com.example.tag.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,10 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = findViewById(R.id.toolbar_login);
+        Toolbar toolbar = findViewById(R.id.login_toolbar);
         toolbar.setTitle("T∆G");
         setSupportActionBar(toolbar);
         System.out.println(toolbar.getTitle());
+
+
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 

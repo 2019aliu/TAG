@@ -8,7 +8,7 @@
     tools:context=".EditActivity">
 
     <include
-        android:id="@id/toolbar_login"
+        android:id="@id/login_toolbar"
         layout="@layout/toolbar" />
 
     <TextView
@@ -82,10 +82,10 @@
         android:layout_marginBottom="100dp"
         android:contentDescription="@string/item_desc_hint"
         app:layout_constraintBottom_toTopOf="@+id/descriptionLabel"
-        app:layout_constraintEnd_toStartOf="@+id/toolbar_login"
+        app:layout_constraintEnd_toStartOf="@+id/login_toolbar"
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toEndOf="@+id/nameLabel"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_login"
+        app:layout_constraintTop_toBottomOf="@+id/login_toolbar"
         app:layout_constraintVertical_bias="0.579"
         app:srcCompat="@mipmap/itemsicon_foreground" />
 

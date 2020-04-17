@@ -19,7 +19,6 @@ import com.google.android.gms.nearby.connection.ConnectionInfo;
 import com.google.android.gms.nearby.connection.ConnectionLifecycleCallback;
 import com.google.android.gms.nearby.connection.ConnectionResolution;
 import com.google.android.gms.nearby.connection.ConnectionsClient;
-import com.google.android.gms.nearby.connection.ConnectionsStatusCodes;
 import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo;
 import com.google.android.gms.nearby.connection.DiscoveryOptions;
 import com.google.android.gms.nearby.connection.EndpointDiscoveryCallback;
@@ -173,8 +172,11 @@ public class CloseRangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_close_range);
         builder = new AlertDialog.Builder(CloseRangeActivity.this);
-        Toolbar toolbar = findViewById(R.id.toolbar_login);
+        Toolbar toolbar = findViewById(R.id.closerange_toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("T∆G");
+        setSupportActionBar(toolbar);
+        System.out.println(toolbar.getTitle());
 
         // Initialize all buttons
         taglightButton = (ImageButton) findViewById(R.id.taglightButton);

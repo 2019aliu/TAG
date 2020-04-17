@@ -19,7 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MyItemActivity extends AppCompatActivity {
 
     private ImageButton editButton;
-    private ImageButton findButton;
+    private Button findButton;
 
     private String id;
     private String name;
@@ -36,6 +36,7 @@ public class MyItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_item);
         Toolbar toolbar = findViewById(R.id.myitem_toolbar);
         toolbar.setTitle("T∆G");
+        System.out.println(toolbar.getTitle());
         setSupportActionBar(toolbar);
 
         // Get extras from the previous intent,
@@ -54,7 +55,7 @@ public class MyItemActivity extends AppCompatActivity {
 
         // Initialize all buttons
         editButton = (ImageButton) findViewById(R.id.editButton);
-        findButton = (ImageButton) findViewById(R.id.mapButton);
+        findButton = (Button) findViewById(R.id.locate_button);
 
         // Set listeners to open new intents in Android
         // Find

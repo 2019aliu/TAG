@@ -12,20 +12,9 @@
     android:paddingBottom="0dp"
     tools:context=".ui.login.LoginActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_login"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_marginBottom="230dp"
-        android:background="#F5302E2E"
-        app:layout_constraintBottom_toTopOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:subtitleTextColor="#00FAF4F4"
-        app:titleTextColor="#00F0ECEC" />
+    <include
+        android:id="@+id/login_toolbar"
+        layout="@layout/toolbar" />
 
     <EditText
         android:id="@+id/username"

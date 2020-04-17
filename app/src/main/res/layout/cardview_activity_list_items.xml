@@ -7,14 +7,14 @@
     tools:context=".ListItemsActivity">
 
     <include
-        android:id="@id/toolbar_login"
+        android:id="@id/login_toolbar"
         layout="@layout/toolbar"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar_login"
+        app:layout_constraintBottom_toTopOf="@+id/login_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,7 @@
         app:borderWidth="0dp"
         app:fabSize="auto"
         app:layout_constraintBottom_toTopOf="@+id/FAB"
-        app:layout_constraintEnd_toStartOf="@+id/toolbar_login"
+        app:layout_constraintEnd_toStartOf="@+id/login_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/ic_add_grey_24dp" />
