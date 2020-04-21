@@ -7,10 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -19,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MyItemActivity extends AppCompatActivity {
 
     private ImageButton editButton;
-    private Button findButton;
+    private ImageButton findButton;
 
     private String id;
     private String name;
@@ -34,10 +32,6 @@ public class MyItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_item);
-        Toolbar toolbar = findViewById(R.id.myitem_toolbar);
-        toolbar.setTitle("T∆G");
-        System.out.println(toolbar.getTitle());
-        setSupportActionBar(toolbar);
 
         // Get extras from the previous intent,
         // which should be the listitemsActivity
@@ -55,7 +49,7 @@ public class MyItemActivity extends AppCompatActivity {
 
         // Initialize all buttons
         editButton = (ImageButton) findViewById(R.id.editButton);
-        findButton = (Button) findViewById(R.id.locate_button);
+        findButton = (ImageButton) findViewById(R.id.mapButton);
 
         // Set listeners to open new intents in Android
         // Find
@@ -88,20 +82,22 @@ public class MyItemActivity extends AppCompatActivity {
                 // Attempt to start an activity that can handle the Intent
                 if (mapIntent.resolveActivity(getPackageManager()) != null) {
                     // Open up the next activity first
-                    Intent BTWifiIntent = new Intent(MyItemActivity.this, BTWifiActivity.class);
-                    startActivity(BTWifiIntent);
+                    Intent CloseRangeIntent = new Intent(MyItemActivity.this, CloseRangeActivity.class);
+                    startActivity(CloseRangeIntent);
                     // And then open up Google Maps
                     startActivity(mapIntent);
                 }
             }
         });
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.myitem_navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
+                        Intent homeIntent = new Intent(MyItemActivity.this, ListItemsActivity.class);
+                        startActivity(homeIntent);
                         break;
                     case R.id.navigation_add:
                         Intent addIntent = new Intent(MyItemActivity.this, RegisterActivity.class);

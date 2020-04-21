@@ -38,9 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Toolbar toolbar = findViewById(R.id.registerToolbar);
-        toolbar.setTitle("T∆G");
-        setSupportActionBar(toolbar);
 
         // inflate all components, get the text
         mNameEditText = findViewById(R.id.itemName);

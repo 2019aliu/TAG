@@ -42,10 +42,6 @@ public class ListItemsActivity extends AppCompatActivity implements MyAdapter.It
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_items);
-        Toolbar toolbar = findViewById(R.id.list_item_toolbar);
-        toolbar.setTitle("T∆G");
-        setSupportActionBar(toolbar);
-        System.out.println(toolbar.getTitle());
 
         // Initializing the database
         mDatabase = FirebaseDatabase.getInstance().getReference("test");

@@ -8,7 +8,7 @@
     tools:context=".MyItemActivity">
 
     <include
-        android:id="@+id/myitem_toolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -28,13 +28,14 @@
         android:id="@+id/mapButton"
         android:layout_width="195dp"
         android:layout_height="73dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginBottom="124dp"
         android:backgroundTint="#F5302E2E"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_map_grey"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myitem_image"
+        app:layout_constraintVertical_bias="0.20" />
 
     <ImageButton
         android:id="@+id/editButton"
@@ -44,28 +45,26 @@
         android:layout_marginEnd="8dp"
         android:backgroundTint="#F5302E2E"
         android:src="@drawable/ic_edit_grey"
-        app:layout_constraintBottom_toTopOf="@+id/myitem_image"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myitem_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <ImageView
         android:id="@+id/removeImage"
         android:layout_width="92dp"
         android:layout_height="81dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@mipmap/removeitem_foreground" />
 
     <ImageView
         android:id="@+id/myitem_image"
-        android:layout_width="375dp"
-        android:layout_height="381dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="32dp"
+        android:background="@mipmap/ic_itemicon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editButton"
-        app:srcCompat="@mipmap/items_foreground" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editButton" />
 
     <Button
         android:id="@+id/locate_button"
@@ -77,7 +76,8 @@
         android:text="@string/find_item"
         android:textColor="#E2E2E2"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/myitem_navigation"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,5 @@
 package com.example.tag;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,29 +11,6 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.gms.nearby.Nearby;
-import com.google.android.gms.nearby.connection.AdvertisingOptions;
-import com.google.android.gms.nearby.connection.ConnectionInfo;
-import com.google.android.gms.nearby.connection.ConnectionLifecycleCallback;
-import com.google.android.gms.nearby.connection.ConnectionResolution;
-import com.google.android.gms.nearby.connection.ConnectionsClient;
-import com.google.android.gms.nearby.connection.DiscoveredEndpointInfo;
-import com.google.android.gms.nearby.connection.DiscoveryOptions;
-import com.google.android.gms.nearby.connection.EndpointDiscoveryCallback;
-import com.google.android.gms.nearby.connection.Payload;
-import com.google.android.gms.nearby.connection.PayloadCallback;
-import com.google.android.gms.nearby.connection.PayloadTransferUpdate;
-import com.google.android.gms.nearby.connection.Strategy;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
@@ -80,11 +56,6 @@ public class CloseRangeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_close_range);
         builder = new AlertDialog.Builder(CloseRangeActivity.this);
-        Toolbar toolbar = findViewById(R.id.closerange_toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("T∆G");
-        setSupportActionBar(toolbar);
-        System.out.println(toolbar.getTitle());
 
         // Initialize all buttons
         taglightButton = findViewById(R.id.taglightButton);
@@ -171,7 +142,7 @@ public class CloseRangeActivity extends AppCompatActivity {
         Log.i(TAG, "Unpublishing.");
         if (mMessage != null) {
             Nearby.getMessagesClient(this).unpublish(mMessage);
-            mMessage= null;
+            mMessage = null;
         }
     }
 

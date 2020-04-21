@@ -8,28 +8,38 @@
     tools:context=".EditActivity">
 
     <include
-        android:id="@id/login_toolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="0dp"
+        android:contentDescription="@string/item_desc_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:srcCompat="@mipmap/items_foreground" />
 
     <TextView
         android:id="@+id/nameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginEnd="344dp"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
         android:text="@string/nameLabel"
         android:textColor="#F8070707"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/itemName"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/item_image" />
 
     <EditText
         android:id="@+id/itemName"
-        android:layout_width="360dp"
-        android:layout_height="52dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
+        android:layout_marginEnd="@dimen/textHorizontalMargin"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -40,7 +50,6 @@
         android:textColorHint="#9F141414"
         app:layout_constraintBottom_toTopOf="@+id/descriptionLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameLabel" />
 
@@ -48,23 +57,21 @@
         android:id="@+id/descriptionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="307dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
         android:text="@string/descriptionLabel"
         android:textColor="#050505"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/itemDescription"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <EditText
         android:id="@+id/itemDescription"
-        android:layout_width="359dp"
-        android:layout_height="53dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
         android:layout_marginTop="4dp"
+        android:layout_marginEnd="@dimen/textHorizontalMargin"
         android:backgroundTint="#090808"
         android:ems="10"
         android:hint="@string/item_desc_hint"
@@ -74,28 +81,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionLabel" />
 
-    <ImageView
-        android:id="@+id/newitemimage"
-        android:layout_width="315dp"
-        android:layout_height="310dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginBottom="100dp"
-        android:contentDescription="@string/item_desc_hint"
-        app:layout_constraintBottom_toTopOf="@+id/descriptionLabel"
-        app:layout_constraintEnd_toStartOf="@+id/login_toolbar"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toEndOf="@+id/nameLabel"
-        app:layout_constraintTop_toBottomOf="@+id/login_toolbar"
-        app:layout_constraintVertical_bias="0.579"
-        app:srcCompat="@mipmap/itemsicon_foreground" />
-
     <Button
         android:id="@+id/updateButton"
         android:layout_width="168dp"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:backgroundTint="#F5302E2E"
         android:foregroundTint="#000C0B0B"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:text="@string/button_edit"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,8 +97,8 @@
         app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView2"
-        android:layout_width="452dp"
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:background="#F5302E2E"
@@ -117,14 +111,11 @@
 
     <ImageButton
         android:id="@+id/removeButton"
-        android:layout_width="64dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="347dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="#E2E2E2"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView2"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:src="@mipmap/removeitem_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

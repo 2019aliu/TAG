@@ -21,7 +21,7 @@
 <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
     <include
-        android:id="@+id/registerToolbar"
+        android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
     <include

@@ -37,7 +37,7 @@
         android:id="@+id/indicatorsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
 
         <ImageButton
             android:id="@+id/taglightButton"
-            android:layout_width="167dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:adjustViewBounds="false"
@@ -60,7 +60,7 @@
 
         <ImageButton
             android:id="@+id/tagvibrateButton"
-            android:layout_width="167dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#F2B1B1B1"
             android:contentDescription="@string/closerange_cold"
@@ -74,17 +74,18 @@
 
     <Button
         android:id="@+id/founditem"
-        android:layout_width="177dp"
-        android:layout_height="75dp"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="128dp"
         android:backgroundTint="#F5302E2E"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="@string/found_ok"
         android:textColor="#E2E2E2"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicatorsLayout"
-        app:layout_constraintVertical_bias="0.20" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

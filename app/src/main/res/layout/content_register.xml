@@ -23,9 +23,9 @@
 
     <ImageView
         android:id="@+id/newitemimage"
-        android:layout_width="432dp"
-        android:layout_height="326dp"
-        android:layout_marginTop="39dp"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginTop="56dp"
         android:contentDescription="@string/item_desc_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,25 +36,20 @@
         android:id="@+id/nameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginEnd="344dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
         android:text="@string/nameLabel"
         android:textColor="#F8070707"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/itemName"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/newitemimage" />
 
     <EditText
         android:id="@+id/itemName"
-        android:layout_width="360dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="25dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
+        android:layout_marginEnd="@dimen/textHorizontalMargin"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#000000"
         android:ems="10"
@@ -72,23 +67,20 @@
         android:id="@+id/descriptionLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="307dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
         android:text="@string/descriptionLabel"
         android:textColor="#050505"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/itemDescription"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <EditText
         android:id="@+id/itemDescription"
-        android:layout_width="359dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="27dp"
-        android:layout_marginEnd="25dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/textHorizontalMargin"
+        android:layout_marginEnd="@dimen/textHorizontalMargin"
         android:layout_marginBottom="20dp"
         android:backgroundTint="#090808"
         android:ems="10"
@@ -102,19 +94,16 @@
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="168dp"
+        android:layout_width="186dp"
         android:layout_height="53dp"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="122dp"
+        android:layout_marginBottom="128dp"
         android:backgroundTint="#F5302E2E"
         android:foregroundTint="#000C0B0B"
         android:text="@string/button_register"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemDescription" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
