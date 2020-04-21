@@ -57,7 +57,11 @@
             android:name=".CloseRangeActivity"
             android:label="@string/title_activity_close_range"
             android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".SearchActivity" />
         <activity android:name=".BTWifiActivity" />
@@ -69,6 +73,11 @@
             android:name=".ListItemsActivity"
             android:label="@string/title_activity_list_items"
             android:theme="@style/AppTheme.NoActionBar">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -86,11 +95,11 @@
         <activity
             android:name=".LoggedOutActivity"
             android:label="LoggedOutActivity">
-            <intent-filter>
+            <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
     </application>
 

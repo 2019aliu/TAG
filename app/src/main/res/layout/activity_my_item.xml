@@ -12,7 +12,7 @@
         layout="@layout/toolbar" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/myitem_navigation"
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -23,6 +23,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
+
+    <ImageButton
+        android:id="@+id/mapButton"
+        android:layout_width="195dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginBottom="124dp"
+        android:backgroundTint="#F5302E2E"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_map_grey"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/editButton"
@@ -40,7 +52,9 @@
         android:id="@+id/removeImage"
         android:layout_width="92dp"
         android:layout_height="81dp"
-        app:layout_constraintBottom_toTopOf="@id/myitem_navigation"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@mipmap/removeitem_foreground" />
 
