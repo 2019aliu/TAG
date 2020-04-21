@@ -116,6 +116,6 @@
         android:background="#E2E2E2"
         app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@mipmap/removeitem_foreground" />
+        android:src="@mipmap/removeitem_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

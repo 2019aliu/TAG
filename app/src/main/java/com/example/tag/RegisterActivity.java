@@ -74,7 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
                 // Structures to hold all of the device names
                 HashMap<String, String> deviceIds = new HashMap<>();
                 AlertDialog.Builder builderSingle = new AlertDialog.Builder(RegisterActivity.this);
-//                builderSingle.setIcon(R.drawable.circle);
                 builderSingle.setTitle("Select your device:");
                 final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(RegisterActivity.this, android.R.layout.select_dialog_singlechoice);
 

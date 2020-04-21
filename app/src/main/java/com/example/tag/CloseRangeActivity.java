@@ -220,6 +220,7 @@ public class CloseRangeActivity extends AppCompatActivity {
                     cam.startPreview();
                     new android.os.Handler().postDelayed(
                             () -> {
+                                p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
                                 cam.stopPreview();
                                 cam.release();
                             },
@@ -231,14 +232,13 @@ public class CloseRangeActivity extends AppCompatActivity {
         tagvibrateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                // Vibrate for 500 milliseconds
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    vibrator.vibrate(VibrationEffect.createOneShot(VIBRATION_DURATION_MILLISECONDS, VibrationEffect.DEFAULT_AMPLITUDE));
-                } else {
-                    //deprecated in API 26
-                    vibrator.vibrate(VIBRATION_DURATION_MILLISECONDS);
-                }
+                String vibrateMessage = "Vibrate " + VIBRATION_DURATION_MILLISECONDS;
+                publish(vibrateMessage);
+                new android.os.Handler().postDelayed(
+                        () -> {
+                            unpublish();
+                        },
+                        5000);
             }
         });
 

@@ -60,6 +60,10 @@
     <string name="find_item">LOCATE ITEM</string>
 
 
+    <string name="delete_item_dialog_title">Delete Item</string>
+    <string name="delete_item_dialog_message">Are you sure you want to delete this item?</string>
+
+
 
     <string name="closerange_cold">Start walking around</string>
     <string name="closerange_medium">Getting closer…</string>
