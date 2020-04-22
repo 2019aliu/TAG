@@ -2,9 +2,11 @@ package com.example.tag;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,14 +14,27 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static String TAG = MapsActivity.class.getSimpleName();
+
     private GoogleMap mMap;
+
+    // Databasing
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +59,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         startActivity(addIntent);
                         break;
                     case R.id.navigation_map:
-                        Intent mapIntent = new Intent(MapsActivity.this, MapsActivity.class);
-                        startActivity(mapIntent);
                         break;
                 }
                 return false;
@@ -67,9 +80,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Initializing the database
+        mDatabase = FirebaseDatabase.getInstance().getReference("test");
+        final DatabaseReference mUserItems = mDatabase.child("testUser");
+//        final ArrayList<MyItem> myDataset = new ArrayList<>();  // this will be a list of items
+
+        mUserItems.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                HashMap<String, HashMap<String, Object>> items =
+                        (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                for (String itemName: items.keySet()) {
+                    if (! ((Boolean) items.get(itemName).get("pending")) ) {
+                        Log.d(TAG, itemName);
+                        MyItem item = new MyItem(items.get(itemName));
+                        item.setId(itemName);
+                        LatLng item_marker = new LatLng(item.getLatitude(), item.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(item_marker).title(item.getName()));
+                        builder.include(item_marker);
+                    }
+                }
+                LatLngBounds bounds = builder.build();
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 250));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 }
